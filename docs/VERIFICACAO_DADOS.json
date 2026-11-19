@@ -1,0 +1,205 @@
+{
+ "fontes": {
+  "seeds2_dados_Cenario_2_BESS_FV_REDE_v5_43e3ac07.xlsx": "85d7ed0d11c112230a93c548ca2cf71a9fc71ea99cab68b1b6e98482fa3aecc4",
+  "seeds2_relatorio_Cenario_1_FV_REDE_v7_6f164853.pdf": "13dd852ea690fa98cf99815be25a219419d8aec2e1ba87c0579732ad325b4088",
+  "seeds2_relatorio_Cenario_2_BESS_FV_REDE_v5_4713c3e1.pdf": "0f12e311d081ae623791a7830ed08507d72f28eaab274a4af191368b9a6425b4"
+ },
+ "identidade_xlsx_43e3ac07_x_pdf_4713c3e1": {
+  "v2/auditoria.json": true,
+  "v2/coordenacoes.json": false,
+  "v2/fronteiras.csv": true,
+  "v2/indice.json": false,
+  "v2/intervalos.csv": true,
+  "v2/janelas.csv": false,
+  "v2/modelo.json": false,
+  "v2/planos.csv": true,
+  "v2/preflight.json": true,
+  "v2/registros_selados.zip": false,
+  "v2/renovaveis.json": true
+ },
+ "entradas": {
+  "demanda_assets_x_gravada_maxabs_kW": 0.0,
+  "demanda_prevista_x_realizada_maxabs_kW": 0.0,
+  "tarifa_txt_x_gravada_maxabs": 0.0,
+  "tarifa_csv_x_txt_maxabs": 0.0,
+  "n_intervalos": 96,
+  "demanda_pacote_interno_x_gravada_maxabs_kW": 0.0,
+  "tarifa_pacote_interno_x_gravada_intervalos_diferentes": [
+   40,
+   41,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   51,
+   52,
+   53,
+   54,
+   55,
+   60,
+   61,
+   62,
+   63
+  ]
+ },
+ "c6b_selado_x_series": {
+  "E_demanda_kWh": {
+   "series": 21810467.1125,
+   "selado": 21810467.1125,
+   "dif": 0.0
+  },
+  "E_importada_kWh": {
+   "series": 18008061.62934895,
+   "selado": 18008061.62934895,
+   "dif": 0.0
+  },
+  "E_fv_aproveitada_kWh": {
+   "series": 3874463.11473,
+   "selado": 3874463.11473,
+   "dif": 0.0
+  },
+  "E_carga_kWh": {
+   "series": 739052.6315789474,
+   "selado": 739052.6315789474,
+   "dif": 0.0
+  },
+  "E_descarga_kWh": {
+   "series": 666995.0,
+   "selado": 666995.0,
+   "dif": 0.0
+  },
+  "custo_R": {
+   "series": 10220903.28849379,
+   "selado": 10220903.28849379,
+   "dif": 0.0
+  },
+  "custo_intervalos_R": {
+   "series": 10220903.28849379,
+   "selado": 10220903.28849379,
+   "dif": 0.0
+  }
+ },
+ "c6b_balanco_maxabs_kW": 1.1641532182693481e-10,
+ "c6b_vertimento_total_kWh": 0.0,
+ "c6b_fv_pico_kW": 514635.5369999999,
+ "c6b_soc": {
+  "inicial": 0.2,
+  "final": 0.2
+ },
+ "c6b_pc_e_pd_simultaneos": 0,
+ "c6b_potencia_max_carga_descarga_kW": [
+  200000.00000000015,
+  200000.00000000003
+ ],
+ "c6b_por_patamar_tarifario": {
+  "0.50": {
+   "intervalos": 60,
+   "descarga_kWh": 66994.99999999993,
+   "carga_kWh": 2.9103830456733704e-11
+  },
+  "0.30": {
+   "intervalos": 4,
+   "descarga_kWh": 0.0,
+   "carga_kWh": 0.0
+  },
+  "0.10": {
+   "intervalos": 12,
+   "descarga_kWh": 0.0,
+   "carga_kWh": 600000.0
+  },
+  "0.20": {
+   "intervalos": 4,
+   "descarga_kWh": 0.0,
+   "carga_kWh": 139052.63157894736
+  },
+  "0.45": {
+   "intervalos": 4,
+   "descarga_kWh": 0.0,
+   "carga_kWh": 0.0
+  },
+  "1.50": {
+   "intervalos": 12,
+   "descarga_kWh": 600000.0,
+   "carga_kWh": 0.0
+  }
+ },
+ "c6b_janelas": {
+  "carga": [
+   "11:00",
+   "11:15",
+   "11:30",
+   "11:45",
+   "12:00",
+   "12:15",
+   "12:30",
+   "12:45",
+   "13:00",
+   "13:15",
+   "13:30",
+   "13:45",
+   "14:15",
+   "14:30",
+   "14:45"
+  ],
+  "descarga": [
+   "16:00",
+   "16:15",
+   "17:15",
+   "18:00",
+   "18:15",
+   "18:30",
+   "18:45",
+   "19:00",
+   "19:15",
+   "19:30",
+   "19:45",
+   "20:00",
+   "20:15",
+   "20:30",
+   "20:45",
+   "21:00"
+  ]
+ },
+ "c6a": {
+  "custo_pdf_R": 11066590.26,
+  "importacao_readme_kWh": 17936004.0,
+  "derivado_importacao_kWh": 17936003.99777,
+  "derivado_custo_R": 11066590.262178,
+  "derivado_min_importacao_kW": 446794.74300000013,
+  "nota": "DERIVADO (demanda − FV aproveitada do C6-B), NÃO é a série gravada do C6-A; serve só para testar coerência.",
+  "dif_importacao_kWh": -0.002229999750852585,
+  "dif_custo_R": 0.002178000286221504,
+  "v2_intervalos_sha256_pdf": "678b6398c5d3460a1eb9ff73d44549145cd6bbbb5af4aa64af3d0154ef2bace8"
+ },
+ "economia": {
+  "R": 845686.97150621,
+  "pct": 7.641802503187734,
+  "importacao_extra_kWh": 72057.6293489486,
+  "perdas_bess_kWh": 72057.63157894742
+ },
+ "rampas": {
+  "carga_liquida_demanda_menos_fv": {
+   "max_subida_kW_por_15min": 115861.5371999999,
+   "max_descida_kW_por_15min": -124449.95960000006,
+   "pico_kW": 1005239.19,
+   "vale_kW": 446794.74300000013
+  },
+  "importacao_c6b": {
+   "max_subida_kW_por_15min": 193485.42125000025,
+   "max_descida_kW_por_15min": -137280.08102999988,
+   "pico_kW": 987205.1312500002,
+   "vale_kW": 502710.97023
+  },
+  "importacao_c6a_derivada": {
+   "max_subida_kW_por_15min": 115861.5371999999,
+   "max_descida_kW_por_15min": -124449.95960000006,
+   "pico_kW": 1005239.19,
+   "vale_kW": 446794.74300000013
+  }
+ }
+}

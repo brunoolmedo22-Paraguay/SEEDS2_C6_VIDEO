@@ -1,0 +1,24 @@
+{
+  "name": "seeds2-c6-video",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SEEDS2 · C6 — vídeo científico animado (Remotion). Gráficos desenhados a partir dos dados gravados das rodadas.",
+  "scripts": {
+    "dados": "python3 ../ferramentas/preparar_dados.py",
+    "studio": "remotion studio",
+    "render:teste": "remotion render TesteTecnico out/teste_tecnico.mp4",
+    "still:teste": "remotion still TesteTecnico out/teste_tecnico.png --frame=75",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.540",
+    "@remotion/fonts": "4.0.540",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "remotion": "4.0.540"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.12",
+    "typescript": "5.9.2"
+  }
+}
