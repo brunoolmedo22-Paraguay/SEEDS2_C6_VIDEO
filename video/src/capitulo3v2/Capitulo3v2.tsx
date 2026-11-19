@@ -15,7 +15,7 @@ import { Creditos, DUR_CREDITOS } from "./Creditos";
 
 const FUSAO = 14, R2_PAUSA = 75, RITMO = 0.85;
 export const DUR_R2_2 = R2_PAUSA + (DUR_DESP - TL_DESP.completo);
-const R2 = () => {
+export const R2 = () => {
   const f = useCurrentFrame();
   return (
     <AbsoluteFill style={{ opacity: interpolate(f, [0, FUSAO], [0, 1], cl) }}>
