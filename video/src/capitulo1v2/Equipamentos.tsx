@@ -23,8 +23,12 @@ export const TL_EQ = {
   zbSobe: [t0 + 650, t0 + 690], soc: [t0 + 700, t0 + 775], pot: [t0 + 782, t0 + 852], batNotas: t0 + 858,
 } as const;
 export const DUR_EQ = TL_EQ.batNotas + 40 + 135 + 16;     // notas + 4,5 s de exibição estável + saída
+// v3 (capítulo 1 v3): SEM o protagonismo da bateria (SOC e potência realizados ficam para o capítulo de resultados).
+// Depois da ampliação solar, a composição volta e permanece 2,5 s antes da saída. A solar mostra o POTENCIAL FV previsto
+// (entrada do EMS: modelo físico sobre o clima previsto; idêntico ao aproveitado nesta rodada) e nenhum indicador de resultado.
+export const DUR_EQ3 = TL_EQ.zsDesce[1] + 75 + 16;
 
-const ghi: number[] = C.ghi_W_m2, fv: number[] = B.fv_aproveitada_kW, pc: number[] = B.bess_carga_kW, pd: number[] = B.bess_descarga_kW;
+const ghi: number[] = C.ghi_W_m2, fv: number[] = B.fv_aproveitada_kW, fvGravada: number[] = fv, fvPot: number[] = B.fv_potencial_kW, pc: number[] = B.bess_carga_kW, pd: number[] = B.bess_descarga_kW;
 const soc: number[] = B.bess_soc_fronteira.map((s: number) => s * 100);
 const iGhi = ghi.indexOf(Math.max(...ghi)), iFv = fv.indexOf(Math.max(...fv)), kSocMax = soc.indexOf(Math.max(...soc));
 const E = (a: number[]) => a.reduce((s, v) => s + v, 0) * 0.25;   // kWh = Σ média de intervalo × 0,25 h
@@ -68,14 +72,15 @@ const GraficoGHI: React.FC<{ c: Caixa; rev: number; op: number; nota: number }> 
   );
 };
 
-const GraficoFV: React.FC<{ c: Caixa; rev: number; op: number; nota: number }> = ({ c, rev, op, nota }) => {
+const GraficoFV: React.FC<{ c: Caixa; rev: number; op: number; nota: number; v3?: boolean }> = ({ c, rev, op, nota, v3 = false }) => {
+  const fv = v3 ? fvPot : fvGravada;
   const e = escalas(c, 700_000, 0, { esq: 80 });
   const r = e.L + (e.R - e.L) * rev;
   let area = `M${e.x(0)},${e.y(0)}`; fv.forEach((v, i) => { area += `V${e.y(v)}H${e.x(i + 1)}`; }); area += `V${e.y(0)}Z`;
   return (
     <g>
       <defs><clipPath id="fv-rev"><rect x={0} y={0} width={r} height={1080} /></clipPath></defs>
-      <Rotulo x={c.x} y={c.y - 22} texto="POTÊNCIA FV APROVEITADA · GRAVADA NO ENSAIO" op={op} cor={COR.fv} />
+      <Rotulo x={c.x} y={c.y - 22} texto={v3 ? "POTENCIAL FV PREVISTO · MODELO FÍSICO SOBRE O CLIMA DE ENTRADA" : "POTÊNCIA FV APROVEITADA · GRAVADA NO ENSAIO"} op={op} cor={COR.fv} />
       <Grade e={e} ticks={[0, 250_000, 500_000]} fmt={fmtMW} unidade="MW" op={op} />
       <g opacity={op}>
         <line x1={e.L} x2={e.R} y1={e.y(580_000)} y2={e.y(580_000)} stroke={COR.fv} strokeOpacity={0.7} strokeWidth={2} strokeDasharray="10 8" />
@@ -169,18 +174,19 @@ const GraficoPotBat: React.FC<{ c: Caixa; rev: number; op: number; nota: number 
 };
 
 // ---------------------------------------------------------------- cena
-export const Equipamentos = () => {
+export const Equipamentos: React.FC<{ versao?: 2 | 3 }> = ({ versao = 2 }) => {
+  const v3 = versao === 3, DUR = v3 ? DUR_EQ3 : DUR_EQ;
   const f = useCurrentFrame();
   const T = TL_EQ;
   const zs = interpolate(f, [T.zsSobe[0], T.zsSobe[1], T.zsDesce[0], T.zsDesce[1]], [0, 1, 1, 0], { ...cl, easing: suave });
-  const zb = interpolate(f, [T.zbSobe[0], T.zbSobe[1]], [0, 1], { ...cl, easing: suave });
+  const zb = v3 ? 0 : interpolate(f, [T.zbSobe[0], T.zbSobe[1]], [0, 1], { ...cl, easing: suave });
   const cartoes = surgir(f, T.cartoes);
   const ghiRev = interpolate(f, T.ghi, [0, 1], { ...cl, easing: suave });
   const enche = interpolate(f, [T.barra[0], T.barra[0] + 30], [0, 1], { ...cl, easing: saida });
   const zonas = interpolate(f, [T.barra[0] + 26, T.barra[1]], [0, 1], { ...cl, easing: saida });
   const marc = interpolate(f, T.marcador, [0, 1], { ...cl, easing: saida });
   const info = (k: number) => surgir(f, T.info + k * 12);
-  const sai = interpolate(f, [DUR_EQ - 16, DUR_EQ], [1, 0], cl);
+  const sai = interpolate(f, [DUR - 16, DUR], [1, 0], cl);
   // presença de cada coluna: a outra sai de cena durante a ampliação
   const solarVis = 1 - zb, batVis = 1 - zs;
   const sInfoPos = { x: COMP.sInfo.x + (ZS.sInfo.x - COMP.sInfo.x) * zs, y: COMP.sInfo.y + (ZS.sInfo.y - COMP.sInfo.y) * zs };
@@ -201,10 +207,10 @@ export const Equipamentos = () => {
               valor="580 MWp" sub="1.000.000 módulos de 580 W · 20 × 50.000" op={cartoes} desloc={(1 - cartoes) * -14} />
             <GraficoGHI c={ghiCaixa} rev={ghiRev} op={surgir(f, T.ghi[0] - 14)} nota={surgir(f, T.info)} />
             <g>
-              <Valor x={sInfoPos.x} y={sInfoPos.y + 40} v={fmtMW(fv[iFv])} u="MW" r={`pico FV aproveitado · ${hora(iFv)}`} op={info(0)} />
-              <Valor x={sInfoPos.x + 320} y={sInfoPos.y + 40} v={mil(E(fv) / 1000)} u="MWh" r="energia FV no dia · vertimento 0" op={info(1)} />
+              <Valor x={sInfoPos.x} y={sInfoPos.y + 40} v={fmtMW((v3 ? fvPot : fv)[iFv])} u="MW" r={v3 ? `pico do potencial · ${hora(iFv)}` : `pico FV aproveitado · ${hora(iFv)}`} op={info(0)} />
+              <Valor x={sInfoPos.x + 320} y={sInfoPos.y + 40} v={mil(E(v3 ? fvPot : fv) / 1000)} u="MWh" r={v3 ? "potencial FV no dia" : "energia FV no dia · vertimento 0"} op={info(1)} />
             </g>
-            {zs > 0 && <GraficoFV c={ZS.fv} rev={fvRev} op={fvOp} nota={notaFv} />}
+            {zs > 0 && <GraficoFV c={ZS.fv} rev={fvRev} op={fvOp} nota={notaFv} v3={v3} />}
           </g>
           {/* coluna BATERIA */}
           <g opacity={batVis} transform={`translate(${120 * zs}, 0)`}>
@@ -212,8 +218,13 @@ export const Equipamentos = () => {
               valor="1.003 MWh" sub="200 MW de potência operativa · η 95 %" op={cartoes} desloc={(1 - cartoes) * 14} />
             <BarraSOC c={barraCaixa} enche={enche} zonas={zonas} marcador={marc} op={surgir(f, T.barra[0] - 10)} />
             <g opacity={1 - zb}>
-              <Valor x={COMP.bInfo.x} y={COMP.bInfo.y + 40} v="702" u="MWh" r="energia na janela 20–90 % (derivado)" op={info(2)} />
-              <Valor x={COMP.bInfo.x + 400} y={COMP.bInfo.y + 40} v="200" u="MW" r="carga e descarga máximas" op={info(3)} />
+              {v3 ? (<>
+                <Valor x={COMP.bInfo.x} y={COMP.bInfo.y + 40} v="200" u="MW" r="carga e descarga máximas" op={info(2)} />
+                <Valor x={COMP.bInfo.x + 400} y={COMP.bInfo.y + 40} v="95" u="%" r="eficiência de carga e de descarga" op={info(3)} />
+              </>) : (<>
+                <Valor x={COMP.bInfo.x} y={COMP.bInfo.y + 40} v="702" u="MWh" r="energia na janela 20–90 % (derivado)" op={info(2)} />
+                <Valor x={COMP.bInfo.x + 400} y={COMP.bInfo.y + 40} v="200" u="MW" r="carga e descarga máximas" op={info(3)} />
+              </>)}
             </g>
             {zb > 0 && (
               <g opacity={Math.min(1, zb * 1.5)}>
@@ -226,7 +237,8 @@ export const Equipamentos = () => {
         <div style={{ position: "absolute", left: 0, right: 0, bottom: 20, textAlign: "center", fontFamily: FONTE.texto, fontSize: 20, color: COR.tinta3,
           opacity: surgir(f, T.info + 30) }}>
           {zb > 0.5 ? "SOC e potência gravados na rodada C6-B (4713c3e1) · simulação algébrica offline"
-            : zs > 0.5 ? "GHI de entrada (amostra de 15 min usada no intervalo) · potência FV gravada na rodada · ensaio offline"
+            : zs > 0.5 ? (v3 ? "GHI de entrada (amostra de 15 min usada no intervalo) · potencial FV previsto pelo modelo físico · ensaio offline"
+              : "GHI de entrada (amostra de 15 min usada no intervalo) · potência FV gravada na rodada · ensaio offline")
               : "configuração validada do ensaio C6 · clima de entrada de 02/10 · simulação algébrica offline"}
         </div>
         <TituloQueSobe texto={TEXTO_EQ} tamanho={112} ritmo={RITMO_RAPIDO} sobe={SOBE} escalaFinal={0.4} alturaFinal={58} />

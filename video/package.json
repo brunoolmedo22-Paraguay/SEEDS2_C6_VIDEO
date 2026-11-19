@@ -10,6 +10,8 @@
     "render:poc": "remotion render ProvaConceito out/SEEDS2_C6_prova_conceito_v1.mp4",
     "render:cap1": "remotion render Capitulo1 out/SEEDS_C6_capitulo1_v1.mp4",
     "render:cap1v2": "remotion render Capitulo1v2 out/SEEDS_C6_capitulo1_v2.mp4",
+    "render:cap1v3": "remotion render Capitulo1v3 out/SEEDS_C6_capitulo1_v3.mp4",
+    "render:cap2": "remotion render Capitulo2 out/SEEDS_C6_capitulo2_v1.mp4",
     "still:teste": "remotion still TesteTecnico out/teste_tecnico.png --frame=75",
     "typecheck": "tsc --noEmit"
   },
