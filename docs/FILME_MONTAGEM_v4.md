@@ -101,3 +101,13 @@ entregue.
   vetorial ou em alta resolução da LACA resolveria.
 - Propostas anteriores (A–E, cantos 1–5): `docs/evidencias/propostas_rodape*/`; composições `PropostaRodape*` e
   `PropostaCantos*` mantidas só para referência.
+
+## Filme v7 — LACA e GPEnSE no topo (alternativa A, escolhida pelo responsável)
+
+- `video/renders/filme_v7/SEEDS_C6_filme_v7.mp4` (composição `FilmeSEEDSv7`, `npm run render:filme7`): o mesmo filme
+  (1,5×, 102,2 s, 3.066 quadros, 1920×1080, 30 fps, sem áudio) com **LACA no canto superior esquerdo (380 × 105 px) e
+  GPEnSE no superior direito (136 × 140 px)**, em abas quase pretas **`#1c1c1c`** presas à borda superior; as marcas descem do
+  topo no início e saem na dissolução para o fechamento unificado (`filme/MarcasLayout.tsx`, layout «topo»).
+- Faixa superior reservada de 160 px: o conteúdo é reduzido uniformemente a 85,2 % e ancorado na base (nada coberto).
+- Escolhida entre as alternativas A/B/C (`docs/evidencias/propostas_marcas/`). Com o fundo quase preto, o roxo da LACA tem
+  pouco contraste (legível pelo tamanho).
