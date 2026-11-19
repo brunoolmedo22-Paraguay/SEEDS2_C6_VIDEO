@@ -9,7 +9,7 @@ npm run typecheck && npm run render:teste    # out/ não é versionado
 npm run studio                               # pré-visualização local
 ```
 
-- Composições: `Capitulo2` (PASSO 2 → rodada em execução; `src/capitulo2/`), `Capitulo1v3` (capítulo 1 sem resultados do BESS; `src/capitulo1v3/`; ver `docs/CAPITULO1_v3_CAPITULO2_v1.md`), `Capitulo1v2` (capítulo 1 v2; `src/capitulo1v2/`, ver `docs/CAPITULO1_v2.md`), `Capitulo1` (abertura · título · PASSO 1 · curvas de entrada; `src/capitulo1/`, ver `docs/CAPITULO1_v1.md`),
+- Composições: `Capitulo3` (resultados R0–R5; `src/capitulo3/`, ver `docs/CAPITULO3_RESULTADOS_v1.md`; quadros com `node quadros.mjs`), `Capitulo2` (PASSO 2 → rodada em execução; `src/capitulo2/`), `Capitulo1v3` (capítulo 1 sem resultados do BESS; `src/capitulo1v3/`; ver `docs/CAPITULO1_v3_CAPITULO2_v1.md`), `Capitulo1v2` (capítulo 1 v2; `src/capitulo1v2/`, ver `docs/CAPITULO1_v2.md`), `Capitulo1` (abertura · título · PASSO 1 · curvas de entrada; `src/capitulo1/`, ver `docs/CAPITULO1_v1.md`),
   `ProvaConceito` (prova v1 aprovada; `src/cenas/`) e `TesteTecnico` (validação do ambiente).
 - Marca exibida: **SEEDS** (sem «2»); glifo oficial em `src/componentes/LogoSeeds.tsx`.
 - Cores e fontes: `src/tema.ts` e `src/fontes.ts` (tokens da Partitura, tema escuro; fontes OFL em `public/fonts`).
