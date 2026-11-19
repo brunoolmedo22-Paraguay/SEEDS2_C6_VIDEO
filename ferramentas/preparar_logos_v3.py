@@ -102,7 +102,7 @@ for p in sorted(ORIG.glob("0*.png")):
     hh = math.sqrt(A * FATOR.get(p.stem, 1.0) / asp); ww = hh * asp
     k = min(1.0, MAXW / ww, MAXH / hh); ww, hh = round(ww * k), round(hh * k)
     im.resize((ww, hh), Image.LANCZOS).save(SAIDA / p.name, optimize=True)
-    item = {"id": p.stem, "arquivo": f"logos/instituicoes_v2/{p.name}", "w": ww, "h": hh, "recorte": list(bb), "origem": list(Image.open(p).size)}
+    item = {"id": p.stem, "arquivo": f"logos/{SAIDA.name}/{p.name}", "w": ww, "h": hh, "recorte": list(bb), "origem": list(Image.open(p).size)}
     if trat: item["tratamento"] = trat
     saida.append(item)
     print(p.stem, "recorte", bb, "→", ww, "×", hh, f"(escala {ww / (bb[2] - bb[0]):.2f})", trat or "")

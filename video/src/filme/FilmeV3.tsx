@@ -15,8 +15,8 @@ import { Cierre, DUR_CIERRE } from "./Cierre";
 import { Remapear } from "./tempo";
 
 const DUR_ABERTURA3 = DUR_ABERTURA2 + 45;                     // +1,5 s para ler o subtítulo
-const CENAS_C1_V3 = [{ nome: "Abertura", dur: DUR_ABERTURA3, el: <Abertura2 subtitulo={SUBTITULO_SEEDS} dur={DUR_ABERTURA3} /> }, ...CENAS_C1.slice(1)];
-const DUR_C1_V3 = CENAS_C1_V3.reduce((s, c) => s + c.dur, 0);
+export const CENAS_C1_V3 = [{ nome: "Abertura", dur: DUR_ABERTURA3, el: <Abertura2 subtitulo={SUBTITULO_SEEDS} dur={DUR_ABERTURA3} /> }, ...CENAS_C1.slice(1)];
+export const DUR_C1_V3 = CENAS_C1_V3.reduce((s, c) => s + c.dur, 0);
 const FUSAO = 14, FUSAO_R3R4 = 10, FUSAO_CIERRE = 12;
 
 export const FILME3 = (() => {

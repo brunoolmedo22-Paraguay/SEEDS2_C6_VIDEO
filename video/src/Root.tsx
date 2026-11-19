@@ -15,10 +15,13 @@ import { TesteTecnico } from "./TesteTecnico";
 import { DUR_FILME, Filme } from "./filme/Filme";
 import { DUR_FILME2, FilmeV2 } from "./filme/FilmeV2";
 import { DUR_FILME3, FilmeV3 } from "./filme/FilmeV3";
+import { DUR_FILME4, FilmeV4 } from "./filme/FilmeV4";
 import "./fontes";
 
 export const RemotionRoot = () => (
   <>
+    <Composition id="FilmeSEEDSv4" component={FilmeV4} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv4SoTempo" component={FilmeV4} defaultProps={{ rodape: false, escala: 1 }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv3" component={FilmeV3} durationInFrames={DUR_FILME3} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv2" component={FilmeV2} durationInFrames={DUR_FILME2} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDS" component={Filme} durationInFrames={DUR_FILME} fps={30} width={1920} height={1080} />

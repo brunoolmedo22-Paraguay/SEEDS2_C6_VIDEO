@@ -44,7 +44,7 @@ export const DUR_C1 = CENAS_C1.reduce((s, c) => s + c.dur, 0);
 // ---------------------------------------------------------------- 4 · R1 com o tempo remapeado (mesmo componente)
 // pares [quadro de saída, quadro da R1 v2]; interpolação linear entre eles
 const BUILD_FIM = TL_R1.varre[1] + 1;                        // 141: tudo montado (raias, inspetor, estado, varredura do cursor)
-const MAPA_R1: [number, number][] = [
+export const MAPA_R1: [number, number][] = [
   [0, 0], [85, BUILD_FIM],                                   // construção paralela em ≈ 2,8 s (× 1,66)
   [115, TL_R1.zoom[0]],                                      // ≈ 1 s de leitura (trecho estável da v2 percorrido)
   [160, TL_R1.zoom[1]],                                      // ampliação da raia Atendimento em 1,5 s (× 1,47)
