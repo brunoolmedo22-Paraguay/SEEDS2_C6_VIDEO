@@ -8,6 +8,7 @@
     "studio": "remotion studio",
     "render:teste": "remotion render TesteTecnico out/teste_tecnico.mp4",
     "render:poc": "remotion render ProvaConceito out/SEEDS2_C6_prova_conceito_v1.mp4",
+    "render:cap1": "remotion render Capitulo1 out/SEEDS_C6_capitulo1_v1.mp4",
     "still:teste": "remotion still TesteTecnico out/teste_tecnico.png --frame=75",
     "typecheck": "tsc --noEmit"
   },
