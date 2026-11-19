@@ -2,7 +2,8 @@
  "fontes": {
   "seeds2_dados_Cenario_2_BESS_FV_REDE_v5_43e3ac07.xlsx": "85d7ed0d11c112230a93c548ca2cf71a9fc71ea99cab68b1b6e98482fa3aecc4",
   "seeds2_relatorio_Cenario_1_FV_REDE_v7_6f164853.pdf": "13dd852ea690fa98cf99815be25a219419d8aec2e1ba87c0579732ad325b4088",
-  "seeds2_relatorio_Cenario_2_BESS_FV_REDE_v5_4713c3e1.pdf": "0f12e311d081ae623791a7830ed08507d72f28eaab274a4af191368b9a6425b4"
+  "seeds2_relatorio_Cenario_2_BESS_FV_REDE_v5_4713c3e1.pdf": "0f12e311d081ae623791a7830ed08507d72f28eaab274a4af191368b9a6425b4",
+  "seeds2_dados_Cenario_1_FV_REDE_v7_3e3dee6a.xlsx": "3c2a5062a4550240c86c9969dd61bae9bfc29ac36b2069a4b315636e78c189dc"
  },
  "identidade_xlsx_43e3ac07_x_pdf_4713c3e1": {
   "v2/auditoria.json": true,
@@ -176,10 +177,37 @@
   "dif_custo_R": 0.002178000286221504,
   "v2_intervalos_sha256_pdf": "678b6398c5d3460a1eb9ff73d44549145cd6bbbb5af4aa64af3d0154ef2bace8"
  },
+ "identidade_xlsx_3e3dee6a_x_pdf_6f164853": {
+  "v2/auditoria.json": true,
+  "v2/coordenacoes.json": false,
+  "v2/fronteiras.csv": true,
+  "v2/indice.json": false,
+  "v2/intervalos.csv": true,
+  "v2/janelas.csv": false,
+  "v2/modelo.json": false,
+  "v2/planos.csv": true,
+  "v2/preflight.json": true,
+  "v2/registros_selados.zip": false,
+  "v2/renovaveis.json": true
+ },
+ "c6a_gravado": {
+  "rodada_xlsx": "3e3dee6a4aa049ceb230f5166212ec5e",
+  "versao_cenario": 7,
+  "E_importada_series_kWh": 17936003.99777,
+  "E_importada_selado_kWh": 17936003.99777,
+  "custo_series_R": 11066590.262178,
+  "custo_selado_R": 11066590.262178,
+  "custo_selado_x_pdf_R": 0.002178000286221504,
+  "demanda_A_igual_B": true,
+  "tarifa_A_igual_B": true,
+  "fv_A_igual_B": true,
+  "derivado_x_gravado_maxabs_kW": 0.0,
+  "B_menos_A_igual_carga_menos_descarga_maxabs_kW": 8.731149137020111e-11
+ },
  "economia": {
   "R": 845686.97150621,
   "pct": 7.641802503187734,
-  "importacao_extra_kWh": 72057.6293489486,
+  "importacao_extra_kWh": 72057.63157894835,
   "perdas_bess_kWh": 72057.63157894742
  },
  "rampas": {
@@ -195,11 +223,27 @@
    "pico_kW": 987205.1312500002,
    "vale_kW": 502710.97023
   },
-  "importacao_c6a_derivada": {
+  "importacao_c6a_gravada": {
    "max_subida_kW_por_15min": 115861.5371999999,
    "max_descida_kW_por_15min": -124449.95960000006,
    "pico_kW": 1005239.19,
    "vale_kW": 446794.74300000013
   }
+ },
+ "ponta_tarifaria": {
+  "inicio": "18:00",
+  "fim_exclusivo_local": "21:00",
+  "intervalos": 12,
+  "reducao_kW_por_intervalo": [
+   200000.0
+  ]
+ },
+ "transicao_21h_c6b": {
+  "de": "20:45",
+  "para": "21:00",
+  "importacao_antes_kW": 793719.71,
+  "importacao_depois_kW": 987205.1312500002,
+  "salto_kW": 193485.42125000025,
+  "salto_c6a_kW": -1557.859999999986
  }
 }

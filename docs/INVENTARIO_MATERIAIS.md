@@ -16,6 +16,7 @@ superada, não usar · **APOIO** = contexto opcional.
 | `assets/dados/C6_clima_C4_Foz_2026-10-02_96x15min.csv` | GHI e temperatura | CANÔNICO (idêntico ao clima C4 do pacote) |
 | `assets/dados/C6_C_tarifa_valle_solar_96_intervalos.txt` e `C6_tarifa_final_96x15min.csv` | tarifa sintética final | CANÔNICO (= tarifa gravada da decisão) |
 | `assets/dados/C6_parametros_validados.json` | configuração e números consolidados | CANÔNICO (conferido; ver `VERIFICACAO_DADOS.md`) |
+| `assets/resultados/seeds2_dados_Cenario_1_FV_REDE_v7_3e3dee6a.xlsx` | séries gravadas do C6-A (enviado em 19/11/2026) | CANÔNICO — mesmo SHA-256 de `v2/intervalos.csv` da rodada oficial `6f164853` |
 | `assets/estilo-seeds2/{partitura.js,trama.js,trama.css}` | renderer da Partitura | REF — SHA-256 idêntico ao `main` atual do SEEDS2 (inclui as cores do UI-VISUAL-01) |
 
 ## 2. Dentro do pacote
@@ -58,7 +59,8 @@ superada, não usar · **APOIO** = contexto opcional.
 
 ## 3. Lacunas (pedir ao responsável)
 
-1. **Série gravada do C6-A** (`seeds2_dados_Cenario_1_FV_REDE_v7_6f164853.xlsx` ou o `.seeds2study.zip`). O contrafactual «demanda − FV» reproduz importação e custo do PDF dentro de 0,003 kWh / R$ 0,003, mas é DERIVADO; para comparar A × B no filme a série gravada é preferível.
-2. **Logo vetorial oficial.** O PPTX só tem rasters de 135×135 (ícone) e 203×63 («SEEDS»), insuficientes para 1080p. Existe um SVG oficial do glifo na plataforma (`seeds2/ui/static/topbar.js`), de traço mais fino que o ícone do PPT. É preciso decidir entre usar esse SVG ou enviar o arquivo-fonte do ícone e do *wordmark*.
+1. ~~Série gravada do C6-A~~ — **recebida** (19/11/2026): `assets/resultados/seeds2_dados_Cenario_1_FV_REDE_v7_3e3dee6a.xlsx`,
+   mesma versão v7 e mesmos SHA-256 dos dados gravados da rodada oficial `6f164853`.
+2. ~~Logo vetorial oficial~~ — **resolvido**: uso do SVG de `topbar.js` autorizado (`video/public/logo/`). Registro anterior: O PPTX só tem rasters de 135×135 (ícone) e 203×63 («SEEDS»), insuficientes para 1080p. Existe um SVG oficial do glifo na plataforma (`seeds2/ui/static/topbar.js`), de traço mais fino que o ícone do PPT. É preciso decidir entre usar esse SVG ou enviar o arquivo-fonte do ícone e do *wordmark*.
 3. Fonte do *wordmark* «SEEDS» (peso muito pesado; parece Segoe UI Black ou similar).
 4. Narração, trilha, duração, texto em tela e ordem das cenas (decisões em aberto do brief).

@@ -10,8 +10,10 @@ solver. Requisitos: `openpyxl`, `pdftotext` e o pacote extraído em `work/`.
   `renovaveis.json`. Diferem só os arquivos com identificadores e carimbos de tempo: `janelas`, `coordenacoes`, `indice`,
   `modelo` e `registros_selados`. Mesmo padrão já visto no C4. **Conclusão: as séries do XLSX são exatamente as da rodada
   oficial.**
-- C6-A `6f164853`: só existe o PDF. O SHA-256 do `v2/intervalos.csv` (`678b6398…`) está registrado no PDF para conferir
-  quando a série gravada for enviada.
+- C6-A `6f164853`: o XLSX `3e3dee6a` (enviado em 19/11/2026, versionado em `assets/resultados/`) é a reexecução da MESMA
+  versão v7. `v2/intervalos.csv` (`678b6398…`), `fronteiras`, `planos`, `auditoria`, `preflight` e `renovaveis` têm o mesmo
+  SHA-256 do PDF oficial. Importação e custo selados = somas das séries (diferença 0,0); custo = R$ 11.066.590,262178
+  (PDF: R$ 11.066.590,26).
 - As instantâneas `.seeds2snapshot.zip` do pacote **não contêm** nenhuma rodada oficial (ver `INVENTARIO_MATERIAIS.md` §04).
 
 ## 2. Entradas × séries gravadas (C6-B)
@@ -39,9 +41,9 @@ Todas as diferenças são **0,0** (energias = Σ média de intervalo × 0,25 h):
 ## 4. C6-A e economia
 
 - Custo C6-A (PDF): **R$ 11.066.590,26**; economia **R$ 845.686,97 = 7,6418 %** ✓ (README e CLAUDE.md corretos).
-- Contrafactual DERIVADO «importação = demanda − FV aproveitada» (sem BESS, sem vertimento): 17.936.003,998 kWh e
-  R$ 11.066.590,262. Diferença frente ao publicado: −0,002 kWh e +R$ 0,002, que é o arredondamento da exibição. É coerente,
-  mas **não substitui** a série gravada do C6-A.
+- A série GRAVADA do C6-A é idêntica a «demanda − FV aproveitada» (desvio máximo 0,0 kW). Demanda, tarifa e FV aproveitada
+  são IGUAIS em A e B, e **B − A = carga − descarga** em todos os intervalos (resíduo < 10⁻¹⁰ kW). A faixa entre as curvas
+  é, portanto, exatamente a ação do BESS.
 - O C6-B importa **mais** energia que o C6-A (+72.057,6 kWh), exatamente as perdas do BESS (739.052,6 − 666.995,0). O
   ganho é **econômico**: a mesma energia é comprada em horas mais baratas.
 
@@ -59,14 +61,15 @@ Todas as diferenças são **0,0** (energias = Σ média de intervalo × 0,25 h):
 
 ## 6. Pontas e rampas — atenção para o roteiro
 
-| Grandeza | C6-A (derivado) | C6-B (gravado) |
+| Grandeza | C6-A (gravado) | C6-B (gravado) |
 |---|---:|---:|
 | Importação média na ponta tarifária 18:00–20:45 | 989.702 kW | **789.702 kW (−200 MW)** |
 | Pico diário de importação | 1.005.239 kW às 19:30 | 987.205 kW às **21:00** (−1,8 %) |
 | Maior subida em 15 min | +115.862 kW (16:45 → 17:00) | **+193.485 kW (20:45 → 21:00)** |
 | Maior descida em 15 min | −124.450 kW (07:45 → 08:00) | −137.280 kW (13:45 → 14:00) |
 
-- Na janela de ponta, a importação cai **200 MW em todos os 12 intervalos**: esta é a mensagem visual forte e verdadeira.
+- Na janela de ponta, a importação cai **200 MW em todos os 12 intervalos** (exatamente 200.000 kW): esta é a mensagem visual
+  forte e verdadeira. Às 21:00 o C6-B salta 793.719,7 → 987.205,1 kW (+193.485,4 kW); no mesmo instante o C6-A varia −1.557,9 kW.
 - O pico diário quase não cai (−1,8 %) e **migra para 21:00**, quando a tarifa volta a 0,50 e a bateria para.
 - A **maior rampa piora**: +193 MW em 15 min às 21:00, contra +116 MW sem BESS. O filme **não pode** dizer que a rampa foi
   suavizada. Pode dizer que a importação foi deslocada da ponta tarifária e que a mitigação é parcial.

@@ -4,8 +4,8 @@ Confronta:
   * entradas versionadas (`assets/dados/`) × entradas do pacote (`work/…`) × séries gravadas na rodada C6-B (XLSX 43e3ac07);
   * identidade XLSX 43e3ac07 × PDF oficial C6-B 4713c3e1 (SHA-256 dos dados gravados listados nos dois documentos);
   * indicadores selados (XLSX) × somas das séries × números do README/CLAUDE.md;
-  * C6-A (PDF 6f164853): só há indicadores no PDF; testa se «importação = demanda − FV» (sem BESS) reproduz importação e custo
-    publicados — resultado DERIVADO, rotulado como tal, nunca substitui a série gravada do C6-A.
+  * C6-A: XLSX 3e3dee6a (`assets/resultados/`) × PDF oficial 6f164853 (SHA-256 dos dados gravados), indicadores selados ×
+    séries, e o contrafactual DERIVADO «importação = demanda − FV» × a série GRAVADA (só conferência).
 
 Uso: python ferramentas/verificar_dados.py [pasta do pacote extraído] > docs/VERIFICACAO_DADOS.json
 """
@@ -143,11 +143,28 @@ def main() -> None:
     out["c6a"]["dif_custo_R"] = out["c6a"]["derivado_custo_R"] - custo_a
     hashes_a = pdf_hashes(ta)
     out["c6a"]["v2_intervalos_sha256_pdf"] = hashes_a.get("v2/intervalos.csv")
+    xa = RAIZ / "assets" / "resultados" / "seeds2_dados_Cenario_1_FV_REDE_v7_3e3dee6a.xlsx"
+    SA, ma = xlsx_intervalos(xa)
+    out["fontes"][xa.name] = sha(xa)
+    IA = ma["indicadores"]
+    ca = lambda k: [float(x[k]) for x in SA]  # noqa: E731
+    imp_a, dem_a, pv_a, tar_a = ca("pcc_importacao_realizada_kW"), ca("demanda_realizada_kW"), ca("arr-f36eac949fdd|P_R_kW"), ca("tarifa_importacao_decisao_R_kWh")
+    out["identidade_xlsx_3e3dee6a_x_pdf_6f164853"] = {k: hashes_a[k] == ma["procedencia"][k] for k in sorted(set(hashes_a) & set(ma["procedencia"]))}
+    out["c6a_gravado"] = {
+        "rodada_xlsx": ma["identificacao"].get("UID da rodada"), "versao_cenario": ma["identificacao"].get("Versão do cenário"),
+        "E_importada_series_kWh": E(imp_a), "E_importada_selado_kWh": float(IA["energia_importada_kWh"]),
+        "custo_series_R": sum(i * t * DT for i, t in zip(imp_a, tar_a)), "custo_selado_R": float(IA["custo_realizado_total_R"]),
+        "custo_selado_x_pdf_R": float(IA["custo_realizado_total_R"]) - custo_a,
+        "demanda_A_igual_B": dem_a == dem, "tarifa_A_igual_B": tar_a == tar, "fv_A_igual_B": pv_a == pv,
+        "derivado_x_gravado_maxabs_kW": maxabs(deriv, imp_a),
+        "B_menos_A_igual_carga_menos_descarga_maxabs_kW": max(abs((ib - ia) - (c - d)) for ib, ia, c, d in zip(imp, imp_a, pc, pd)),
+    }
+    deriv = imp_a  # daqui em diante: série GRAVADA do C6-A
 
     # 5 · economia e números do README
     custo_b = float(I["custo_realizado_total_R"])
     out["economia"] = {"R": custo_a - custo_b, "pct": 100 * (custo_a - custo_b) / custo_a,
-                       "importacao_extra_kWh": float(I["energia_importada_kWh"]) - imp_a_pub,
+                       "importacao_extra_kWh": float(I["energia_importada_kWh"]) - float(IA["energia_importada_kWh"]),
                        "perdas_bess_kWh": float(I["indicadores_selados.E_bess_carga_kWh"]) - float(I["indicadores_selados.E_bess_descarga_kWh"])}
 
     # 6 · rampas (só medidas; o filme não pode alegar redução sem estes números)
@@ -155,7 +172,13 @@ def main() -> None:
         d = [a[i + 1] - a[i] for i in range(len(a) - 1)]
         return {"max_subida_kW_por_15min": max(d), "max_descida_kW_por_15min": min(d), "pico_kW": max(a), "vale_kW": min(a)}
     liq = [d - p for d, p in zip(dem, pv)]
-    out["rampas"] = {"carga_liquida_demanda_menos_fv": rampas(liq), "importacao_c6b": rampas(imp), "importacao_c6a_derivada": rampas(deriv)}
+    out["rampas"] = {"carga_liquida_demanda_menos_fv": rampas(liq), "importacao_c6b": rampas(imp), "importacao_c6a_gravada": rampas(deriv)}
+    pk = [i for i, t in enumerate(tar) if abs(t - 1.5) < 1e-12]
+    out["ponta_tarifaria"] = {"inicio": S[pk[0]]["inicio_local"][11:16], "fim_exclusivo_local": S[pk[-1] + 1]["inicio_local"][11:16],
+                              "intervalos": len(pk), "reducao_kW_por_intervalo": sorted({round(deriv[i] - imp[i], 6) for i in pk})}
+    j = next(i for i in range(95) if tar[i] == 1.5 and tar[i + 1] != 1.5)
+    out["transicao_21h_c6b"] = {"de": S[j]["inicio_local"][11:16], "para": S[j + 1]["inicio_local"][11:16], "importacao_antes_kW": imp[j],
+                                "importacao_depois_kW": imp[j + 1], "salto_kW": imp[j + 1] - imp[j], "salto_c6a_kW": deriv[j + 1] - deriv[j]}
     print(json.dumps(out, ensure_ascii=False, indent=1))
 
 
