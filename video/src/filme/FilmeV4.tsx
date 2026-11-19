@@ -24,6 +24,7 @@ import { CENAS_C1_V3, DUR_C1_V3, DUR_FILME3, FILME3 } from "./FilmeV3";
 import { FAIXA_RODAPE, RodapeInstitucional } from "./RodapeInstitucional";
 import { Mapa } from "./tempo";
 import { RodapeVariante, VarianteRodape, faixaDe } from "./RodapeVariantes";
+import { FAIXA_CANTOS, RodapeCantos } from "./RodapeCantos";
 
 export const VELOCIDADE = 1.5;
 export const DUR_FILME4 = Math.ceil(DUR_FILME3 / VELOCIDADE);
@@ -46,9 +47,11 @@ const Capitulo1 = () => (
 
 // `corRodape` (opcional): filme v5 = v4 com a faixa do rodapé em cinza escuro (CINZA_RODAPE_ESCURO); padrão = v4.
 // `variante` (opcional, propostas de rodapé maior): substitui o rodapé e a faixa reservada; ausente ⇒ v4/v5 idênticos.
-export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: string; variante?: VarianteRodape }> = ({ rodape = true, escala: esc, corRodape, variante }) => {
-  const escala = esc ?? (variante ? (1080 - faixaDe(variante)) / 1080 : ESCALA_CONTEUDO);
+// `cantos` (opcional): só LACA e GPEnSE grandes nos cantos inferiores; `cor` = aba atrás de cada marca (null = sem fundo).
+export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: string; variante?: VarianteRodape; cantos?: { cor: string | null } }> = ({ rodape = true, escala: esc, corRodape, variante, cantos }) => {
+  const escala = esc ?? (cantos ? (1080 - FAIXA_CANTOS) / 1080 : variante ? (1080 - faixaDe(variante)) / 1080 : ESCALA_CONTEUDO);
   const f = useCurrentFrame();
+  const subida = interpolate(f * VELOCIDADE, [8, 44], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (x) => 1 - Math.pow(1 - x, 3) });
   const src = Math.min(f * VELOCIDADE, DUR_FILME3 - 1);
   const F = FILME3;
   const opR2 = interpolate(src - F.r2, [0, FUSAO_R2], [0, 1], cl);
@@ -68,8 +71,9 @@ export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: 
         <Camada src={src} inicio={F.cierre} dur={DUR_CIERRE}><Cierre /></Camada>
         <Camada src={src} inicio={F.r4} dur={DUR_R4L}><R4v2 /></Camada>
       </AbsoluteFill>
-      {rodape && op > 0 && !variante && <RodapeInstitucional opacidade={op} cor={corRodape} />}
-      {rodape && op > 0 && variante && <RodapeVariante v={variante} opacidade={op} entrada={interpolate(src, [8, 44], [0, 1], { ...cl, easing: (x) => 1 - Math.pow(1 - x, 3) })} />}
+      {rodape && op > 0 && cantos && <RodapeCantos cor={cantos.cor} opacidade={op} entrada={subida} />}
+      {rodape && op > 0 && !variante && !cantos && <RodapeInstitucional opacidade={op} cor={corRodape} />}
+      {rodape && op > 0 && variante && !cantos && <RodapeVariante v={variante} opacidade={op} entrada={interpolate(src, [8, 44], [0, 1], { ...cl, easing: (x) => 1 - Math.pow(1 - x, 3) })} />}
     </AbsoluteFill>
   );
 };
