@@ -13,6 +13,7 @@
     "render:cap1v3": "remotion render Capitulo1v3 out/SEEDS_C6_capitulo1_v3.mp4",
     "render:cap2": "remotion render Capitulo2 out/SEEDS_C6_capitulo2_v1.mp4",
     "render:cap3": "remotion render Capitulo3 out/SEEDS_C6_capitulo3_resultados_v1.mp4",
+    "render:cap3v2": "remotion render Capitulo3v2 out/SEEDS_C6_capitulo3_resultados_v2.mp4",
     "render:proto-resultados": "remotion render ProtoResultadosDespacho out/SEEDS_C6_resultados_prototipo_despacho.mp4",
     "still:teste": "remotion still TesteTecnico out/teste_tecnico.png --frame=75",
     "typecheck": "tsc --noEmit"

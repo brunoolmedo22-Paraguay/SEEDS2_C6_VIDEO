@@ -84,11 +84,11 @@ const Faixa: React.FC<{ p: readonly [number, number]; cor: string; op: number; r
   </g>
 );
 
-const ApoioSolar: React.FC<{ t: number; dur: number }> = ({ t, dur }) => {
+const ApoioSolar: React.FC<{ t: number; dur: number; k?: number }> = ({ t, dur, k = 1 }) => {
   const e = eA(600_000), a = interpolate(t, [10, 26, dur - 16, dur], [0, 1, 1, 0], cl);
-  const r = e.L + (e.R - e.L) * interpolate(t, [20, 80], [0, 1], { ...cl, easing: saida });
+  const r = e.L + (e.R - e.L) * interpolate(t, [20, 20 + 60 * k], [0, 1], { ...cl, easing: saida });
   let area = `M${e.x(0)},${e.y(0)}`; fv.forEach((v, i) => { area += `V${e.y(v)}H${e.x(i + 1)}`; }); area += `V${e.y(0)}Z`;
-  const ip = fv.indexOf(Math.max(...fv)), nota = interpolate(t, [86, 104], [0, 1], cl);
+  const ip = fv.indexOf(Math.max(...fv)), nota = interpolate(t, [20 + 66 * k, 38 + 66 * k], [0, 1], cl);
   return (
     <g opacity={a}>
       <defs><clipPath id="ap-fv"><rect x={0} y={0} width={r} height={1080} /></clipPath></defs>
@@ -105,9 +105,9 @@ const ApoioSolar: React.FC<{ t: number; dur: number }> = ({ t, dur }) => {
   );
 };
 
-const ApoioRede: React.FC<{ t: number; dur: number }> = ({ t, dur }) => {
+const ApoioRede: React.FC<{ t: number; dur: number; k?: number }> = ({ t, dur, k = 1 }) => {
   const e = eA(1.75), a = interpolate(t, [10, 26, dur - 16, dur], [0, 1, 1, 0], cl);
-  const r = e.L + (e.R - e.L) * interpolate(t, [20, 80], [0, 1], { ...cl, easing: saida });
+  const r = e.L + (e.R - e.L) * interpolate(t, [20, 20 + 60 * k], [0, 1], { ...cl, easing: saida });
   return (
     <g opacity={a}>
       <defs><clipPath id="ap-tar"><rect x={0} y={0} width={r} height={1080} /></clipPath></defs>
@@ -118,12 +118,12 @@ const ApoioRede: React.FC<{ t: number; dur: number }> = ({ t, dur }) => {
   );
 };
 
-const ApoioBateria: React.FC<{ t: number; dur: number }> = ({ t, dur }) => {
+const ApoioBateria: React.FC<{ t: number; dur: number; k?: number }> = ({ t, dur, k = 1 }) => {
   const e = eA(100), a = interpolate(t, [10, 26, dur - 16, dur], [0, 1, 1, 0], cl);
-  const rev = interpolate(t, [20, 84], [0, 1], { ...cl, easing: saida });
+  const rev = interpolate(t, [20, 20 + 64 * k], [0, 1], { ...cl, easing: saida });
   const xf = (k: number) => e.L + (k / N) * (e.R - e.L), r = e.L + (e.R - e.L) * rev;
   const pts = soc.map((s, k) => `${xf(k)},${e.y(s)}`).join(" ");
-  const kMax = soc.indexOf(Math.max(...soc)), nota = interpolate(t, [90, 108], [0, 1], cl);
+  const kMax = soc.indexOf(Math.max(...soc)), nota = interpolate(t, [20 + 70 * k, 38 + 70 * k], [0, 1], cl);
   return (
     <g opacity={a}>
       <defs><clipPath id="ap-soc"><rect x={0} y={0} width={r + 4} height={1080} /></clipPath></defs>
@@ -148,7 +148,9 @@ const Rotulos: React.FC<{ foco: Foco; forca: number }> = ({ foco, forca }) => {
   return <text x={960} y={84} textAnchor="middle" fontFamily={FONTE.titulo} fontWeight={600} fontSize={64} letterSpacing="0.02em" fill={cor} opacity={foco === "todos" ? 1 : forca}>{nome}</text>;
 };
 
-export const ResultadosDespacho = () => {
+/** `ritmo` (opcional, padrão 1 = protótipo aprovado e capítulo 3 v1, idênticos) multiplica SÓ a duração do desenho dos
+ *  gráficos de apoio (revelação e entrada das notas); blocos, pausas, transições e dados não mudam. Capítulo 3 v2: 0,85. */
+export const ResultadosDespacho: React.FC<{ ritmo?: number }> = ({ ritmo = 1 }) => {
   const f = useCurrentFrame();
   const { foco, t } = focoEm(f);
   const bloco = foco === "fv" ? TL_DESP.solar : foco === "grid" ? TL_DESP.rede : foco === "bat" ? TL_DESP.bat : null;
@@ -165,9 +167,9 @@ export const ResultadosDespacho = () => {
         {foco === "grid" && <><Faixa p={VALE} cor={COR.fv} op={nota(40)} rot="vale · R$ 0,10" /><Faixa p={PONTA} cor={COR.tar} op={nota(52)} rot="ponta · R$ 1,50" solida /></>}
         {foco === "bat" && <><Faixa p={CARGA} cor={COR.bat} op={nota(40)} rot={`carrega · ${mil(E(pc) / 1000)} MWh`} /><Faixa p={PONTA} cor={COR.bat} op={nota(56)} rot="descarrega · 600 MWh na ponta" solida /></>}
         <Despacho />
-        {foco === "fv" && <ApoioSolar t={t} dur={dur} />}
-        {foco === "grid" && <ApoioRede t={t} dur={dur} />}
-        {foco === "bat" && <ApoioBateria t={t} dur={dur} />}
+        {foco === "fv" && <ApoioSolar t={t} dur={dur} k={ritmo} />}
+        {foco === "grid" && <ApoioRede t={t} dur={dur} k={ritmo} />}
+        {foco === "bat" && <ApoioBateria t={t} dur={dur} k={ritmo} />}
       </svg>
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 18, textAlign: "center", fontFamily: FONTE.texto, fontSize: 20, color: COR.tinta3 }}>
         Rodada C6-B 4713c3e1 · médias de 15 min gravadas · simulação algébrica offline · tarifa sintética

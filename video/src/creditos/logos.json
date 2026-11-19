@@ -1,0 +1,98 @@
+[
+ {
+  "id": "01_CEAR",
+  "arquivo": "logos/instituicoes/01_CEAR.png",
+  "w": 138,
+  "h": 137,
+  "recorte": [
+   22,
+   1,
+   159,
+   137
+  ],
+  "origem": [
+   190,
+   137
+  ]
+ },
+ {
+  "id": "02_Programa_verde",
+  "arquivo": "logos/instituicoes/02_Programa_verde.png",
+  "w": 239,
+  "h": 80,
+  "recorte": [
+   40,
+   15,
+   256,
+   87
+  ],
+  "origem": [
+   311,
+   107
+  ]
+ },
+ {
+  "id": "03_LACA",
+  "arquivo": "logos/instituicoes/03_LACA.png",
+  "w": 262,
+  "h": 72,
+  "recorte": [
+   0,
+   0,
+   221,
+   61
+  ],
+  "origem": [
+   221,
+   63
+  ]
+ },
+ {
+  "id": "04_GPEnSE",
+  "arquivo": "logos/instituicoes/04_GPEnSE.png",
+  "w": 136,
+  "h": 140,
+  "recorte": [
+   108,
+   18,
+   250,
+   164
+  ],
+  "origem": [
+   359,
+   164
+  ]
+ },
+ {
+  "id": "05_UFPB",
+  "arquivo": "logos/instituicoes/05_UFPB.png",
+  "w": 101,
+  "h": 166,
+  "recorte": [
+   179,
+   13,
+   452,
+   462
+  ],
+  "origem": [
+   648,
+   483
+  ]
+ },
+ {
+  "id": "06_UNILA",
+  "arquivo": "logos/instituicoes/06_UNILA.png",
+  "w": 219,
+  "h": 135,
+  "recorte": [
+   373,
+   299,
+   1155,
+   780
+  ],
+  "origem": [
+   1527,
+   1080
+  ]
+ }
+]
