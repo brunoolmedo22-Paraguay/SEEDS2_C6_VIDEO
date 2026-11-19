@@ -87,3 +87,17 @@ entregue.
   menor que no `#949494` (≈ 2 × ≈ 4,6), troca aceita pela discrição. O painel grande do fechamento continua em `#949494`.
 - O v4 não muda (quadro 2796 reconferido byte a byte depois da alteração). Quadros: `video/renders/filme_v5/quadro_0153.png`
   (abertura) e `quadro_2796.png` (PEAK SHAVING).
+
+## Filme v6 — só LACA e GPEnSE, grandes, nos cantos inferiores
+
+- `video/renders/filme_v6/SEEDS_C6_filme_v6.mp4` (composição `FilmeSEEDSv6`, `npm run render:filme6`): o mesmo filme v4/v5
+  (1,5×, 102,2 s, 3.066 quadros, 1920×1080, 30 fps, sem áudio), com o rodapé substituído conforme o pedido do responsável:
+  **só LACA (esquerda, 380 × 105 px) e GPEnSE (direita, 136 × 140 px)**, cada um numa aba presa à borda inferior em cinza
+  bem escuro **`#333333`**, entrando de baixo para cima no início (`filme/RodapeCantos.tsx`; logotipos de
+  `ferramentas/preparar_logos_rodape_cantos.py`, mesmo tratamento, cores e proporções oficiais).
+- Faixa reservada de 160 px: o conteúdo do filme é reduzido uniformemente a 85,2 % (nada coberto). O rodapé sai na
+  dissolução para o fechamento unificado (que mostra as seis marcas).
+- Observação: o arquivo original da LACA tem 221 px de largura; a 380 px fica ampliado 1,72× (um pouco suave). Uma versão
+  vetorial ou em alta resolução da LACA resolveria.
+- Propostas anteriores (A–E, cantos 1–5): `docs/evidencias/propostas_rodape*/`; composições `PropostaRodape*` e
+  `PropostaCantos*` mantidas só para referência.
