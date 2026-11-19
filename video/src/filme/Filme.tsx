@@ -38,7 +38,7 @@ const EquipCorte = () => {
     </AbsoluteFill>
   );
 };
-const CENAS_C1 = [...CENAS_CAP1V2.slice(0, 4), { nome: "Solar + bateria (composição conjunta)", dur: CORTE_EQ, el: <EquipCorte /> }];
+export const CENAS_C1 = [...CENAS_CAP1V2.slice(0, 4), { nome: "Solar + bateria (composição conjunta)", dur: CORTE_EQ, el: <EquipCorte /> }];
 export const DUR_C1 = CENAS_C1.reduce((s, c) => s + c.dur, 0);
 
 // ---------------------------------------------------------------- 4 · R1 com o tempo remapeado (mesmo componente)
@@ -51,7 +51,7 @@ const MAPA_R1: [number, number][] = [
   [160 + (DUR_R1_2 - TL_R1.zoom[1]), DUR_R1_2],              // mesma cauda da v2 (fusão com a R2)
 ];
 export const DUR_R1F = MAPA_R1[MAPA_R1.length - 1][0];
-const R1Rapida = () => {
+export const R1Rapida = () => {
   const f = useCurrentFrame();
   const src = interpolate(f, MAPA_R1.map((p) => p[0]), MAPA_R1.map((p) => p[1]), cl);
   return <Freeze frame={src}><R1Partitura2 /></Freeze>;

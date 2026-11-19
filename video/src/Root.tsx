@@ -13,10 +13,12 @@ import { DUR_EQ, Equipamentos } from "./capitulo1v2/Equipamentos";
 import { DURACAO, ProvaConceito } from "./cenas/ProvaConceito";
 import { TesteTecnico } from "./TesteTecnico";
 import { DUR_FILME, Filme } from "./filme/Filme";
+import { DUR_FILME2, FilmeV2 } from "./filme/FilmeV2";
 import "./fontes";
 
 export const RemotionRoot = () => (
   <>
+    <Composition id="FilmeSEEDSv2" component={FilmeV2} durationInFrames={DUR_FILME2} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDS" component={Filme} durationInFrames={DUR_FILME} fps={30} width={1920} height={1080} />
     <Composition id="Capitulo3v2" component={Capitulo3v2} durationInFrames={DUR_CAP3V2} fps={30} width={1920} height={1080} />
     <Composition id="Creditos" component={Creditos} durationInFrames={DUR_CREDITOS} fps={30} width={1920} height={1080} />
