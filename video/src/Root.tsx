@@ -20,6 +20,9 @@ import "./fontes";
 
 export const RemotionRoot = () => (
   <>
+    <Composition id="PropostaTopo1" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: "#121212" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaTopo2" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: "#0b0b0b" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaTopo3" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: null } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv7" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: "#1c1c1c" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="PropostaMarcasA" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: "#1c1c1c" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="PropostaMarcasB" component={FilmeV4} defaultProps={{ marcas: { layout: "esquerda", cor: "#1c1c1c" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
