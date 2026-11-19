@@ -25,6 +25,7 @@ import { FAIXA_RODAPE, RodapeInstitucional } from "./RodapeInstitucional";
 import { Mapa } from "./tempo";
 import { RodapeVariante, VarianteRodape, faixaDe } from "./RodapeVariantes";
 import { FAIXA_CANTOS, RodapeCantos } from "./RodapeCantos";
+import { LayoutMarcas, Marcas, transformConteudo } from "./MarcasLayout";
 
 export const VELOCIDADE = 1.5;
 export const DUR_FILME4 = Math.ceil(DUR_FILME3 / VELOCIDADE);
@@ -48,8 +49,9 @@ const Capitulo1 = () => (
 // `corRodape` (opcional): filme v5 = v4 com a faixa do rodapé em cinza escuro (CINZA_RODAPE_ESCURO); padrão = v4.
 // `variante` (opcional, propostas de rodapé maior): substitui o rodapé e a faixa reservada; ausente ⇒ v4/v5 idênticos.
 // `cantos` (opcional): só LACA e GPEnSE grandes nos cantos inferiores; `cor` = aba atrás de cada marca (null = sem fundo).
-export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: string; variante?: VarianteRodape; cantos?: { cor: string | null } }> = ({ rodape = true, escala: esc, corRodape, variante, cantos }) => {
-  const escala = esc ?? (cantos ? (1080 - FAIXA_CANTOS) / 1080 : variante ? (1080 - faixaDe(variante)) / 1080 : ESCALA_CONTEUDO);
+export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: string; variante?: VarianteRodape; cantos?: { cor: string | null }; marcas?: LayoutMarcas }> = ({ rodape = true, escala: esc, corRodape, variante, cantos, marcas }) => {
+  const tm = marcas ? transformConteudo(marcas) : null;
+  const escala = esc ?? (tm ? tm.s : cantos ? (1080 - FAIXA_CANTOS) / 1080 : variante ? (1080 - faixaDe(variante)) / 1080 : ESCALA_CONTEUDO);
   const f = useCurrentFrame();
   const subida = interpolate(f * VELOCIDADE, [8, 44], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (x) => 1 - Math.pow(1 - x, 3) });
   const src = Math.min(f * VELOCIDADE, DUR_FILME3 - 1);
@@ -59,7 +61,7 @@ export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: 
   const op = interpolate(src, [8, 32, F.cierre - 12, F.cierre + 12], [0, 1, 1, 0], cl);
   return (
     <AbsoluteFill style={{ background: COR.fundo }}>
-      <AbsoluteFill style={{ transform: escala === 1 ? undefined : `scale(${escala})`, transformOrigin: "50% 0%" }}>
+      <AbsoluteFill style={{ transform: escala === 1 ? undefined : `scale(${escala})`, transformOrigin: tm ? tm.origem : "50% 0%" }}>
         {/* mesma ordem de camadas do filme v3 */}
         <Camada src={src} inicio={F.c1} dur={DUR_C1_V3}><Capitulo1 /></Camada>
         <Camada src={src} inicio={F.r1} dur={DUR_R1F} mapa={MAPA_R1}><R1Partitura2 /></Camada>
@@ -71,9 +73,10 @@ export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: 
         <Camada src={src} inicio={F.cierre} dur={DUR_CIERRE}><Cierre /></Camada>
         <Camada src={src} inicio={F.r4} dur={DUR_R4L}><R4v2 /></Camada>
       </AbsoluteFill>
-      {rodape && op > 0 && cantos && <RodapeCantos cor={cantos.cor} opacidade={op} entrada={subida} />}
-      {rodape && op > 0 && !variante && !cantos && <RodapeInstitucional opacidade={op} cor={corRodape} />}
-      {rodape && op > 0 && variante && !cantos && <RodapeVariante v={variante} opacidade={op} entrada={interpolate(src, [8, 44], [0, 1], { ...cl, easing: (x) => 1 - Math.pow(1 - x, 3) })} />}
+      {rodape && op > 0 && marcas && <Marcas m={marcas} opacidade={op} entrada={subida} />}
+      {rodape && op > 0 && !marcas && cantos && <RodapeCantos cor={cantos.cor} opacidade={op} entrada={subida} />}
+      {rodape && op > 0 && !marcas && !variante && !cantos && <RodapeInstitucional opacidade={op} cor={corRodape} />}
+      {rodape && op > 0 && !marcas && variante && !cantos && <RodapeVariante v={variante} opacidade={op} entrada={interpolate(src, [8, 44], [0, 1], { ...cl, easing: (x) => 1 - Math.pow(1 - x, 3) })} />}
     </AbsoluteFill>
   );
 };
