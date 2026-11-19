@@ -1,0 +1,57 @@
+{
+  "cenario": "C6 — SIN Escalado / Curva de Pato",
+  "status": "experimental_algebraico_offline",
+  "cenario_base": "C6-A · FV + REDE",
+  "cenario_bess": "C6-B · FV + BESS + REDE",
+  "demanda": "CSV 96×15 min; divisão da curva SIN por 100",
+  "fotovoltaica": {
+    "modelo_modulo": "CS7L-580MS",
+    "quantidade_modulos": 1000000,
+    "potencia_modulo_Wp": 580,
+    "potencia_instalada_MWp": 580,
+    "ns": 20,
+    "np": 50000
+  },
+  "bess": {
+    "energia_nominal_MWh": 1003,
+    "potencia_operativa_MW": 200,
+    "soc_inicial_percent": 20,
+    "soc_final_percent": 20,
+    "eta_carga": 0.95,
+    "eta_descarga": 0.95,
+    "carregada_MWh": 739.0526315789474,
+    "descarregada_MWh": 666.995
+  },
+  "intervalos": {
+    "qtd": 96,
+    "delta_min": 15,
+    "horizonte_curto": 8,
+    "bloco_aplicado": 4,
+    "horizonte_longo": 96
+  },
+  "pcc": {
+    "limite_importacao_MW": 1200,
+    "somente_importacao": true
+  },
+  "tarifa": {
+    "tipo": "sintética experimental de vale solar",
+    "arquivo": "assets/dados/C6_C_tarifa_valle_solar_96_intervalos.txt"
+  },
+  "rodadas_finais": {
+    "C6_A": {
+      "sha_prefix": "6f164853",
+      "custo_R": 11066590.26,
+      "energia_importada_MWh": 17936.004
+    },
+    "C6_B": {
+      "sha_prefix": "4713c3e1",
+      "custo_R": 10220903.29,
+      "energia_importada_MWh": 18008.0616
+    }
+  },
+  "conclusao": {
+    "economia_R": 845686.97,
+    "economia_pct_arredondado": 7.64,
+    "avaliacao": "Otimização econômica com mitigação parcial da importação na ponta; não é objetivo explícito de suavização da curva do pato"
+  }
+}
