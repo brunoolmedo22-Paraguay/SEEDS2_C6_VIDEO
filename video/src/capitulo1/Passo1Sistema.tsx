@@ -13,10 +13,11 @@ import { COR, FONTE } from "../tema";
 
 export const TEXTO_PASSO1 = "PASSO 1: ADICIONANDO O SISTEMA";
 const SOBE = momentoSubida(TEXTO_PASSO1, RITMO_RAPIDO);
+export const SOBE_PASSO1 = SOBE;   // diagrama completo em SOBE + 116 (último nó com texto)
 export const DUR_PASSO1 = SOBE + 160;
 
-type Tipo = "fv" | "bat" | "dem" | "grid";
-const ICONE: Record<Tipo, React.ReactNode> = {
+export type Tipo = "fv" | "bat" | "dem" | "grid";
+export const ICONE: Record<Tipo, React.ReactNode> = {
   fv: (<><path d="M5 22l4-12h14l4 12z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /><path d="M7 16h18M14 10l-2 12M18 10l2 12" stroke="currentColor" strokeWidth="1.5" opacity=".7" /><path d="M16 22v5M11 27h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></>),
   bat: (<><rect x="5" y="9" width="20" height="14" rx="3" fill="none" stroke="currentColor" strokeWidth="2" /><rect x="25" y="13" width="3" height="6" rx="1" fill="currentColor" /><rect x="8" y="12" width="5" height="8" rx="1" fill="currentColor" opacity=".8" /><rect x="14" y="12" width="5" height="8" rx="1" fill="currentColor" opacity=".45" /></>),
   dem: (<><path d="M5 15.5L16 6l11 9.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M8 13.5V26h16V13.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /><path d="M17.2 14.5l-3.4 5.2h3.6l-2.6 4.8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></>),
@@ -72,11 +73,12 @@ const NoPlanta: React.FC<{ n: No; t0: number }> = ({ n, t0 }) => {
   );
 };
 
-export const Passo1Sistema = () => {
+// `dur` (opcional; capítulo 1 v2) prolonga a exibição estável; o padrão é a duração da v1, que fica inalterada.
+export const Passo1Sistema: React.FC<{ dur?: number }> = ({ dur = DUR_PASSO1 }) => {
   const f = useCurrentFrame();
   const t0 = SOBE + 16;
   return (
-    <AbsoluteFill style={{ background: COR.fundo, opacity: opacidadeCena(f, DUR_PASSO1, 1) }}>
+    <AbsoluteFill style={{ background: COR.fundo, opacity: opacidadeCena(f, dur, 1) }}>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
         <Barramento t0={t0} />
         {NOS.map((n) => <NoPlanta key={n.tipo} n={n} t0={t0 + 22} />)}

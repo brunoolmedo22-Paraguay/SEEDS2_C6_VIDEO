@@ -72,9 +72,18 @@ def main() -> None:
     assert A["fv_aproveitada_kW"] == B["fv_aproveitada_kW"], "FV aproveitada difere entre A e B"
     for i in range(96):  # diferença B − A = carga − descarga (balanço do barramento), dentro do resíduo numérico
         assert abs((B["importacao_kW"][i] - A["importacao_kW"][i]) - (B["bess_carga_kW"][i] - B["bess_descarga_kW"][i])) < 1e-6, i
+    # clima de ENTRADA (assets/dados, idêntico ao clima C4 do pacote): GHI e temperatura, uma amostra por intervalo
+    import csv
+    fc = RAIZ / "assets" / "dados" / "C6_clima_C4_Foz_2026-10-02_96x15min.csv"
+    linhas = list(csv.DictReader(fc.open(encoding="utf-8")))
+    assert [r["timestamp"][11:16] for r in linhas] == B["inicio_local"], "clima fora da malha dos intervalos"
+    js["clima"] = {"fonte": {"arquivo": fc.name, "sha256": hashlib.sha256(fc.read_bytes()).hexdigest(),
+                             "nota": "Clima de entrada do ensaio (C4 original, Foz do Iguaçu, 02/10). Valores copiados sem alteração."},
+                   "delta_min": 15, "inicio_local": B["inicio_local"],
+                   "ghi_W_m2": [float(r["ghi_W_m2"]) for r in linhas], "temperatura_C": [float(r["temperature_C"]) for r in linhas]}
     for n, d in js.items():
         (SAIDA / f"{n}.json").write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
-        print(f"OK video/src/dados/{n}.json: {len(d['inicio_local'])} intervalos ({d['fonte']['rodada_oficial_pdf'][:8]})")
+        print(f"OK video/src/dados/{n}.json: {len(d['inicio_local'])} intervalos ({d['fonte'].get('rodada_oficial_pdf', d['fonte']['arquivo'])[:40]})")
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ npm run typecheck && npm run render:teste    # out/ não é versionado
 npm run studio                               # pré-visualização local
 ```
 
-- Composições: `Capitulo1` (abertura · título · PASSO 1 · curvas de entrada; `src/capitulo1/`, ver `docs/CAPITULO1_v1.md`),
+- Composições: `Capitulo1v2` (capítulo 1 v2; `src/capitulo1v2/`, ver `docs/CAPITULO1_v2.md`), `Capitulo1` (abertura · título · PASSO 1 · curvas de entrada; `src/capitulo1/`, ver `docs/CAPITULO1_v1.md`),
   `ProvaConceito` (prova v1 aprovada; `src/cenas/`) e `TesteTecnico` (validação do ambiente).
 - Marca exibida: **SEEDS** (sem «2»); glifo oficial em `src/componentes/LogoSeeds.tsx`.
 - Cores e fontes: `src/tema.ts` e `src/fontes.ts` (tokens da Partitura, tema escuro; fontes OFL em `public/fonts`).
