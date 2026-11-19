@@ -32,7 +32,7 @@ const MAPA_R2: Mapa = (() => {
 })();
 export const DUR_R2V2 = duracaoMapa(MAPA_R2);
 const FUSAO = 14;
-const R2v2 = () => {
+export const R2v2 = () => {
   const f = useCurrentFrame();
   return (
     <AbsoluteFill style={{ opacity: interpolate(f, [0, FUSAO], [0, 1], cl) }}>
@@ -43,7 +43,7 @@ const R2v2 = () => {
 
 // ---------------------------------------------------------------- R3 · carga líquida → vale → ponta
 const [a1, b1] = TL_R3.e1, [a2, b2] = TL_R3.e2;
-const MAPA_R3: Mapa = (() => {
+export const MAPA_R3: Mapa = (() => {
   const m: [number, number][] = [[0, 0], [150, TL_R3.liq2[1] + 2], [165, a1]];   // construção × 1,75; 0,5 s antes do vale
   m.push(...bloco(165, a1, b1, 56, 40, LEIT, 14, 12));
   m.push(...bloco(m[m.length - 1][0], a2, b2, 56, 40, LEIT, 14, 12));
@@ -54,7 +54,7 @@ export const DUR_R3V2 = duracaoMapa(MAPA_R3);
 
 // ---------------------------------------------------------------- R4 lado a lado → marca
 const SAIDA_R4 = 24, FUSAO_MARCA = 12, FUSAO_R3R4 = 10;
-const R4v2 = () => {
+export const R4v2 = () => {
   const f = useCurrentFrame();
   return <AbsoluteFill style={{ opacity: interpolate(f, [DUR_R4L - SAIDA_R4, DUR_R4L], [1, 0], { ...cl, easing: (x) => x * x }) }}><R4LadoALado /></AbsoluteFill>;
 };

@@ -31,13 +31,17 @@ const Glifo: React.FC<{ x: number; y: number; lado: number }> = ({ x, y, lado })
   </svg>
 );
 
-export const Abertura2 = () => {
+// Opcionais (filme v3): `subtitulo` — linha pequena sob a marca, depois da revelação da palavra; `dur` — duração da cena
+// (para dar tempo de leitura). Sem eles, a abertura é idêntica à aprovada.
+export const SUBTITULO_SEEDS = "Smart Energy Ecosystem for Decision Support";
+export const Abertura2: React.FC<{ subtitulo?: string; dur?: number }> = ({ subtitulo, dur = DUR_ABERTURA2 }) => {
   const f = useCurrentFrame();
   const entrada = interpolate(f, [0, 20], [0, 1], { ...cl, easing: saida });
   const escalaEntrada = interpolate(f, [0, 20], [0.94, 1], { ...cl, easing: saida });
   const lado = interpolate(f, [56, 96], [GRANDE, PEQUENO], { ...cl, easing: saida });
   const p = interpolate(f, [108, 166], [0, 1], { ...cl, easing: saida });            // termina no quadro 166, exatamente em 1
-  const sai = interpolate(f, [DUR_ABERTURA2 - 16, DUR_ABERTURA2], [1, 0], cl);
+  const sai = interpolate(f, [dur - 16, dur], [1, 0], cl);
+  const sub = interpolate(f, [172, 198], [0, 1], { ...cl, easing: saida });
   // ícone: centrado na tela até a revelação; depois desliza até a posição final inteira
   const iconeEsq = interpolate(p, [0, 1], [CX - PEQUENO / 2, ICONE_FINAL_ESQ]);
   const iconeX = p > 0 ? iconeEsq : CX - lado / 2;
@@ -56,6 +60,10 @@ export const Abertura2 = () => {
           )}
           <Glifo x={iconeX} y={CY - lado / 2} lado={lado} />
         </g>
+        {subtitulo && (
+          <text x={CX} y={CY + PEQUENO / 2 + 96 + (1 - sub) * 10} textAnchor="middle" opacity={sub} fontFamily={FONTE.texto} fontSize={36}
+            letterSpacing="0.06em" fill={COR.tinta2}>{subtitulo}</text>
+        )}
       </svg>
     </AbsoluteFill>
   );

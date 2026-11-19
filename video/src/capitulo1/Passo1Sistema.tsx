@@ -40,7 +40,9 @@ const Barramento: React.FC<{ t0: number }> = ({ t0 }) => {
   const meio = (BARRA_L + BARRA_R) / 2, meia = ((BARRA_R - BARRA_L) / 2) * p;
   return (
     <g>
-      <line x1={meio - meia} x2={meio + meia} y1={BARRA_Y} y2={BARRA_Y} stroke={COR.tinta} strokeWidth={6} strokeLinecap="round" />
+      {/* só desenha depois que começa a crescer: com comprimento zero, a ponta redonda deixava um ponto solto no centro da tela
+          durante toda a digitação do título (corrigido no filme v3) */}
+      {p > 0 && <line x1={meio - meia} x2={meio + meia} y1={BARRA_Y} y2={BARRA_Y} stroke={COR.tinta} strokeWidth={6} strokeLinecap="round" />}
       <text x={BARRA_L} y={BARRA_Y - 22} fontFamily={FONTE.titulo} fontWeight={600} fontSize={19} letterSpacing="0.12em" fill={COR.tinta3}
         opacity={interpolate(f, [t0 + 18, t0 + 34], [0, 1], cl)}>BARRAMENTO EQUIVALENTE</text>
     </g>
