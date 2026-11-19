@@ -14,11 +14,13 @@ const GAP = 34, PAD_X = 24, ALT = 56, H_MAX = 44;
 const LARGURA = LOGOS.reduce((s, l) => s + l.w, 0) + GAP * (LOGOS.length - 1);
 const X0 = Math.round((1920 - LARGURA) / 2), Y_FAIXA = 1080 - FAIXA_RODAPE, Y_PILULA = Y_FAIXA + Math.round((FAIXA_RODAPE - ALT) / 2);
 
-export const RodapeInstitucional: React.FC<{ opacidade: number }> = ({ opacidade }) => {
+// `cor` (opcional): cor da faixa — filme v4: #949494 (padrão); filme v5: cinza escuro #5a5a5a (pedido do responsável).
+export const CINZA_RODAPE_ESCURO = "#5a5a5a";
+export const RodapeInstitucional: React.FC<{ opacidade: number; cor?: string }> = ({ opacidade, cor = CINZA_CREDITOS }) => {
   let x = X0;
   return (
     <div style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: opacidade, pointerEvents: "none" }}>
-      <div style={{ position: "absolute", left: X0 - PAD_X, top: Y_PILULA, width: LARGURA + 2 * PAD_X, height: ALT, borderRadius: ALT / 2, background: CINZA_CREDITOS }} />
+      <div style={{ position: "absolute", left: X0 - PAD_X, top: Y_PILULA, width: LARGURA + 2 * PAD_X, height: ALT, borderRadius: ALT / 2, background: cor }} />
       {LOGOS.map((l) => {
         const el = <Img key={l.id} src={staticFile(l.arquivo)} width={l.w} height={l.h}
           style={{ position: "absolute", left: x, top: Y_PILULA + Math.round((ALT - H_MAX) / 2) + Math.round((H_MAX - l.h) / 2) }} />;

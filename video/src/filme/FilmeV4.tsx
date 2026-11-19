@@ -43,7 +43,8 @@ const Capitulo1 = () => (
   </Series>
 );
 
-export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number }> = ({ rodape = true, escala = ESCALA_CONTEUDO }) => {
+// `corRodape` (opcional): filme v5 = v4 com a faixa do rodapé em cinza escuro (CINZA_RODAPE_ESCURO); padrão = v4.
+export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: string }> = ({ rodape = true, escala = ESCALA_CONTEUDO, corRodape }) => {
   const f = useCurrentFrame();
   const src = Math.min(f * VELOCIDADE, DUR_FILME3 - 1);
   const F = FILME3;
@@ -64,7 +65,7 @@ export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number }> = ({ rodap
         <Camada src={src} inicio={F.cierre} dur={DUR_CIERRE}><Cierre /></Camada>
         <Camada src={src} inicio={F.r4} dur={DUR_R4L}><R4v2 /></Camada>
       </AbsoluteFill>
-      {rodape && op > 0 && <RodapeInstitucional opacidade={op} />}
+      {rodape && op > 0 && <RodapeInstitucional opacidade={op} cor={corRodape} />}
     </AbsoluteFill>
   );
 };

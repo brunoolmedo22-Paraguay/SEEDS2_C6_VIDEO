@@ -76,3 +76,14 @@ entregue.
 | `2430` | 81,0 s | R3 vale + rodapé |
 | `2796` | 93,2 s | PEAK SHAVING lado a lado + rodapé |
 | `2934` | 97,8 s | fechamento unificado (sem rodapé duplicado) |
+
+## Filme v5 — faixa do rodapé em cinza escuro
+
+- `video/renders/filme_v5/SEEDS_C6_filme_v5.mp4` (composição `FilmeSEEDSv5`, `npm run render:filme5`): **idêntico ao v4**
+  exceto a cor da faixa do rodapé, **`#949494` → `#5a5a5a`** (pedido do responsável: menos clara). Mesmo tempo (102,2 s,
+  3.066 quadros), 1920×1080, 30 fps, sem áudio.
+- Testados `#4a4a4a`, `#555555`, `#606060` e `#6b6b6b`. Abaixo de `#555555`, LACA e UNILA (roxo-escuro) começam a sumir;
+  `#5a5a5a` é o tom mais escuro em que as seis marcas e o nome «UFPB» continuam reconhecíveis. O contraste dos roxos é
+  menor que no `#949494` (≈ 2 × ≈ 4,6), troca aceita pela discrição. O painel grande do fechamento continua em `#949494`.
+- O v4 não muda (quadro 2796 reconferido byte a byte depois da alteração). Quadros: `video/renders/filme_v5/quadro_0153.png`
+  (abertura) e `quadro_2796.png` (PEAK SHAVING).

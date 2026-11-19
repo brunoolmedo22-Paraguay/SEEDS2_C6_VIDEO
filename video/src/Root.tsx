@@ -20,6 +20,7 @@ import "./fontes";
 
 export const RemotionRoot = () => (
   <>
+    <Composition id="FilmeSEEDSv5" component={FilmeV4} defaultProps={{ corRodape: "#5a5a5a" }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv4" component={FilmeV4} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv4SoTempo" component={FilmeV4} defaultProps={{ rodape: false, escala: 1 }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv3" component={FilmeV3} durationInFrames={DUR_FILME3} fps={30} width={1920} height={1080} />
