@@ -20,6 +20,11 @@ import "./fontes";
 
 export const RemotionRoot = () => (
   <>
+    <Composition id="PropostaRodapeE" component={FilmeV4} defaultProps={{ variante: { estilo: "aba", cor: "#5a5a5a", gap: 56, grande: true } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeA" component={FilmeV4} defaultProps={{ variante: { estilo: "pilula", cor: "#5a5a5a", gap: 46 } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeB" component={FilmeV4} defaultProps={{ variante: { estilo: "aba", cor: "#5a5a5a", gap: 50 } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeC" component={FilmeV4} defaultProps={{ variante: { estilo: "faixa", cor: "#555555", gap: 64 } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeD" component={FilmeV4} defaultProps={{ variante: { estilo: "aba", cor: "#7a7a7a", gap: 50 } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv5" component={FilmeV4} defaultProps={{ corRodape: "#5a5a5a" }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv4" component={FilmeV4} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv4SoTempo" component={FilmeV4} defaultProps={{ rodape: false, escala: 1 }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
