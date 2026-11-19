@@ -2,8 +2,8 @@
  {
   "id": "03_LACA",
   "arquivo": "logos/instituicoes_rodape_cantos/03_LACA.png",
-  "w": 255,
-  "h": 70,
+  "w": 380,
+  "h": 105,
   "recorte": [
    0,
    0,
@@ -18,8 +18,8 @@
  {
   "id": "04_GPEnSE",
   "arquivo": "logos/instituicoes_rodape_cantos/04_GPEnSE.png",
-  "w": 93,
-  "h": 96,
+  "w": 136,
+  "h": 140,
   "recorte": [
    108,
    18,

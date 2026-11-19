@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Rodapé nos CANTOS (pedido do responsável): só GPEnSE e LACA, grandes (até 96 px), para as propostas de rodapé maior. Mesmo tratamento.
+# Rodapé nos CANTOS (pedido do responsável): só GPEnSE e LACA, grandes (até 140 px), para as propostas de rodapé maior. Mesmo tratamento.
 """RODAPÉ INSTITUCIONAL (filme v4): o MESMO tratamento de preparar_logos_v3.py (que fica intacto), só com tamanhos de
 assinatura discreta (≈ 26–44 px de altura no quadro final). (texto do v3:) Logotipos para o FECHAMENTO UNIFICADO do filme v3 (SIMULADO NO SEEDS à esquerda + marcas à direita, sobre preto).
 Igual a preparar_logos_v2.py (que fica intacto, com suas saídas), mais:
@@ -29,7 +29,7 @@ from PIL import Image
 RAIZ = Path(__file__).resolve().parents[1]
 ORIG, SAIDA = RAIZ / "assets/logos_instituicoes", RAIZ / "video/public/logos/instituicoes_rodape_cantos"
 JSON = RAIZ / "video/src/creditos/logos_rodape_cantos.json"
-A, MAXW, MAXH = 18_000, 270, 96
+A, MAXW, MAXH = 40_000, 380, 140
 FATOR = {"06_UNILA": 1.55}
 LIM, ANEL = 235, 2
 

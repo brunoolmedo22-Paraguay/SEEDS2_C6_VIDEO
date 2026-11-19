@@ -1,12 +1,12 @@
 // RODAPÉ NOS CANTOS (pedido do responsável após as propostas A–E): só LACA (esquerda) e GPEnSE (direita), grandes (até
-// 96 px; ferramentas/preparar_logos_rodape_cantos.py — mesmo tratamento, cores e proporções oficiais), um em cada canto
+// 140 px; ferramentas/preparar_logos_rodape_cantos.py — mesmo tratamento, cores e proporções oficiais), um em cada canto
 // inferior. O conteúdo do filme é reduzido uniformemente para liberar a faixa (nada é coberto). `cor` = aba presa à borda
 // inferior atrás de cada marca; `null` = sem fundo, direto no preto. `entrada` (0–1) = subida a partir da borda inferior.
 import { Img, staticFile } from "remotion";
 import L from "../creditos/logos_rodape_cantos.json";
 
-export const FAIXA_CANTOS = 120;
-const MARGEM = 64, PAD = 26;
+export const FAIXA_CANTOS = 160;
+const MARGEM = 60, PAD = 30;
 const H_MAX = Math.max(...L.map((l) => l.h));
 const laca = L.find((l) => l.id === "03_LACA")!, gpense = L.find((l) => l.id === "04_GPEnSE")!;
 
