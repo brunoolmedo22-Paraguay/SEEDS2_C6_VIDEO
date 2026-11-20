@@ -111,3 +111,18 @@ entregue.
 - Faixa superior reservada de 160 px: o conteúdo é reduzido uniformemente a 85,2 % e ancorado na base (nada coberto).
 - Escolhida entre as alternativas A/B/C (`docs/evidencias/propostas_marcas/`). Com o fundo quase preto, o roxo da LACA tem
   pouco contraste (legível pelo tamanho).
+
+## Filme v8 — título do PASSO 2, «OTIMIZADO NO SEEDS» e marcas no canto superior esquerdo
+
+- `video/renders/filme_v8/SEEDS_C6_filme_v8.mp4` (composição `FilmeSEEDSv8`, `npm run render:filme8`): 1,5×, **102,1 s**
+  (3.063 quadros; o título novo tem um caractere a menos), 1920×1080, 30 fps, sem áudio.
+- **PASSO 2:** «PASSO 2: DEFININDO A SIMULAÇÃO» → **«PASSO 2: DEFININDO PARÂMETROS»** (`filme/Capitulo2Filme.tsx`; o
+  capítulo 2 isolado não muda).
+- **Fechamento:** «SIMULADO NO SEEDS» → **«OTIMIZADO NO SEEDS»** (`filme/Cierre.tsx`).
+- **Marcas:** só LACA (280 × 77 px) em cima e GPEnSE (126 × 130 px) embaixo, **sem fundo**, alinhadas à esquerda no canto
+  superior esquerdo (layout «esquerdaTopo», `filme/MarcasLayout.tsx`). Elas entram pela esquerda no início e saem na
+  dissolução para o fechamento. Coluna esquerda de 340 px reservada: o conteúdo é reduzido a 82,3 % e ancorado à direita,
+  centrado na vertical (nada coberto).
+- Como `Capitulo2Filme` e `Cierre` são compartilhados, um novo render das composições v3–v7 também passa a mostrar os
+  textos novos. Os MP4s já entregues não mudam.
+- Dados: `verificar_capitulo3.py` → «OK — 31 valores conferidos».

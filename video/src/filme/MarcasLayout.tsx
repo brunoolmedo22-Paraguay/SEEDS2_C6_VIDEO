@@ -5,7 +5,7 @@ import { Img, staticFile } from "remotion";
 import C from "../creditos/logos_rodape_cantos.json";
 import K from "../creditos/logos_marcas_coluna.json";
 
-export type LayoutMarcas = { layout: "topo" | "esquerda"; cor: string | null };
+export type LayoutMarcas = { layout: "topo" | "esquerda" | "esquerdaTopo"; cor: string | null };
 export const FAIXA_TOPO = 160, COLUNA = 340;
 export const transformConteudo = (m: LayoutMarcas) =>
   m.layout === "topo" ? { s: (1080 - FAIXA_TOPO) / 1080, origem: "50% 100%" } : { s: (1920 - COLUNA) / 1920, origem: "100% 50%" };
@@ -26,6 +26,15 @@ export const Marcas: React.FC<{ m: LayoutMarcas; opacidade: number; entrada: num
     );
   }
   const laca = K.find((l) => l.id === "03_LACA")!, gp = K.find((l) => l.id === "04_GPEnSE")!;
+  if (m.layout === "esquerdaTopo") {
+    // filme v8: canto SUPERIOR ESQUERDO, LACA em cima e GPEnSE embaixo, ambos alinhados à esquerda, sem fundo
+    const X = 44, Y = 44, G2 = 34, entra = Math.round((1 - entrada) * (COLUNA + 30));
+    return (
+      <div style={{ position: "absolute", inset: 0, opacity: opacidade, translate: `${-entra}px 0px`, overflow: "hidden" }}>
+        {img(laca, X, Y)}{img(gp, X, Y + laca.h + G2)}
+      </div>
+    );
+  }
   const GAP = 64, alt = laca.h + GAP + gp.h, y0 = Math.round((1080 - alt) / 2), cx = COLUNA / 2 + 4, entra = Math.round((1 - entrada) * (COLUNA + 30));
   return (
     <div style={{ position: "absolute", inset: 0, opacity: opacidade, translate: `${-entra}px 0px`, overflow: "hidden" }}>

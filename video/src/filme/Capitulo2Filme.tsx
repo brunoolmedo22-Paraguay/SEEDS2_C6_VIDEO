@@ -24,7 +24,8 @@ import C from "../dados/clima.json";
 import { COR, FONTE } from "../tema";
 import { EstadoRodada, M_BLOCO, ModalExecucao, N_INT, N_JAN, S, TOKENS_MX, transicao } from "../capitulo2/ModalExecucao";
 
-export const TEXTO_PASSO2 = "PASSO 2: DEFININDO A SIMULAÇÃO";
+// Título corrigido a pedido do responsável (filme v8; o capítulo 2 isolado mantém «DEFININDO A SIMULAÇÃO»).
+export const TEXTO_PASSO2 = "PASSO 2: DEFININDO PARÂMETROS";
 const SOBE = momentoSubida(TEXTO_PASSO2, RITMO_RAPIDO);
 const t0 = SOBE + 30;
 const CARD = (k: number) => t0 + 22 + k * 80;              // entrada de cada card (≈ 2,7 s entre cards)

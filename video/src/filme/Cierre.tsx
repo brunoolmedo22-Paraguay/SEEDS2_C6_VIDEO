@@ -1,5 +1,5 @@
 // FECHAMENTO UNIFICADO (filme v3) — UMA cena final sobre PRETO, substituindo «Marca» + «Créditos»:
-//   esquerda: glifo oficial + «SIMULADO NO SEEDS» (mesma digitação da Marca aprovada, alinhada à esquerda) e, em pequeno,
+//   esquerda: glifo oficial + «OTIMIZADO NO SEEDS» (mesma digitação da Marca aprovada, alinhada à esquerda) e, em pequeno,
 //             «Smart Energy Ecosystem for Decision Support» e a frase aprovada do EMS hierárquico MILP–MPC;
 //   direita:  os seis logotipos (ordem do LEIA.txt, duas linhas de três), entrando EM PARALELO com a digitação.
 // Legibilidade sobre preto (docs/FILME_MONTAGEM_v3.md): direto no preto, o texto «UFPB» (preto) desaparece e LACA/UNILA
@@ -16,7 +16,7 @@ import { SUBTITULO_SEEDS } from "../capitulo1v2/Abertura2";
 import { CINZA_CREDITOS } from "./Creditos2";
 import LOGOS from "../creditos/logos_v3.json";
 
-const MARCA = "SIMULADO NO SEEDS";
+const MARCA = "OTIMIZADO NO SEEDS";                      // filme v8 (antes «SIMULADO NO SEEDS»)
 const T = { logo: 6, dig: 34, painel: 10, logos: 22, passo: 7, durLogo: 22 };
 const RIT = { ...RITMO_RAPIDO, inicio: RITMO_RAPIDO.inicio + T.dig, semente: "cap3-r5" };     // = digitação da Marca aprovada
 const FIM_DIG = fimDaDigitacao(MARCA, RIT);
