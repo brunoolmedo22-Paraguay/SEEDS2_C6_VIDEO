@@ -126,3 +126,19 @@ entregue.
 - Como `Capitulo2Filme` e `Cierre` são compartilhados, um novo render das composições v3–v7 também passa a mostrar os
   textos novos. Os MP4s já entregues não mudam.
 - Dados: `verificar_capitulo3.py` → «OK — 31 valores conferidos».
+
+## Filme v9 — conteúdo centrado; LACA no canto superior esquerdo, GPEnSE no inferior direito
+
+- `video/renders/filme_v9/SEEDS_C6_filme_v9.mp4` (composição `FilmeSEEDSv9`, `npm run render:filme9`): igual ao v8
+  (PASSO 2: DEFININDO PARÂMETROS, OTIMIZADO NO SEEDS, 1,5×, **102,1 s**, 3.063 quadros, 1920×1080, 30 fps, sem áudio).
+  A diferença está na posição das marcas, pedida pelo responsável: **o conteúdo principal fica CENTRADO**, sem deslocamento
+  para nenhum lado.
+- **Marcas:** sem fundo; LACA (252 × 70 px) no canto superior esquerdo, que desce do topo ao entrar, e GPEnSE
+  (104 × 107 px) no canto inferior direito, que sobe da base (layout «diagonal», `filme/MarcasLayout.tsx`; logotipos de
+  `ferramentas/preparar_logos_diagonal.py`). Elas saem na dissolução para o fechamento.
+- **Espaço para as marcas:** o conteúdo é reduzido uniformemente a 86 % **a partir do centro**, o que mantém o mesmo centro
+  e libera os cantos.
+- **Verificação de sobreposição:** composição `VerificaDiagonal` (o mesmo filme, sem as marcas), 60 quadros distribuídos
+  pelo filme. Dentro das áreas das duas marcas (com margem de 8 px), o brilho máximo é 10/255, que é apenas o fundo quase
+  preto da Partitura: nenhum texto, eixo ou gráfico fica sob as marcas.
+- Dados: `verificar_capitulo3.py` → «OK — 31 valores conferidos».

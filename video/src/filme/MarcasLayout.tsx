@@ -4,10 +4,14 @@
 import { Img, staticFile } from "remotion";
 import C from "../creditos/logos_rodape_cantos.json";
 import K from "../creditos/logos_marcas_coluna.json";
+import DG from "../creditos/logos_marcas_diagonal.json";
 
-export type LayoutMarcas = { layout: "topo" | "esquerda" | "esquerdaTopo"; cor: string | null };
+export type LayoutMarcas = { layout: "topo" | "esquerda" | "esquerdaTopo" | "diagonal"; cor: string | null };
 export const FAIXA_TOPO = 160, COLUNA = 340;
-export const transformConteudo = (m: LayoutMarcas) =>
+// «diagonal» (filme v9): conteúdo CENTRADO (redução uniforme a partir do centro, sem deslocamento), LACA no canto superior
+// esquerdo e GPEnSE no canto inferior direito, sem fundo.
+export const ESCALA_DIAGONAL = 0.86;
+export const transformConteudo = (m: LayoutMarcas) => m.layout === "diagonal" ? { s: ESCALA_DIAGONAL, origem: "50% 50%" } :
   m.layout === "topo" ? { s: (1080 - FAIXA_TOPO) / 1080, origem: "50% 100%" } : { s: (1920 - COLUNA) / 1920, origem: "100% 50%" };
 
 export const Marcas: React.FC<{ m: LayoutMarcas; opacidade: number; entrada: number }> = ({ m, opacidade, entrada }) => {
@@ -22,6 +26,16 @@ export const Marcas: React.FC<{ m: LayoutMarcas; opacidade: number; entrada: num
       <div style={{ position: "absolute", inset: 0, opacity: opacidade, translate: `0px ${-sobe}px`, overflow: "hidden" }}>
         {aba(60, laca.w)}{aba(1920 - 60 - gp.w, gp.w)}
         {img(laca, 60, Math.round(cy - laca.h / 2))}{img(gp, 1920 - 60 - gp.w, Math.round(cy - gp.h / 2))}
+      </div>
+    );
+  }
+  if (m.layout === "diagonal") {
+    const la = DG.find((l) => l.id === "03_LACA")!, gd = DG.find((l) => l.id === "04_GPEnSE")!;
+    const M = 36, t = Math.round((1 - entrada) * 140);
+    return (
+      <div style={{ position: "absolute", inset: 0, opacity: opacidade, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, translate: `0px ${-t}px` }}>{img(la, M, 10)}</div>
+        <div style={{ position: "absolute", inset: 0, translate: `0px ${t}px` }}>{img(gd, 1920 - M - gd.w, 1080 - 12 - gd.h)}</div>
       </div>
     );
   }
