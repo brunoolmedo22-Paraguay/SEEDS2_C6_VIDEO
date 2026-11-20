@@ -164,3 +164,15 @@ entregue.
     sobre preto, por isso no filme é TEXTO em cinza claro, com as mesmas palavras, a mesma posição e a mesma largura.
 - **Fechamento:** o emblema oficial substitui o glifo violeta antigo acima de «OTIMIZADO NO SEEDS».
 - Dados: `verificar_capitulo3.py` → «OK — 31 valores conferidos».
+
+## Filme v11 — título «SUAVIZANDO A CURVA DE PATO»
+
+- `video/renders/filme_v11/SEEDS_C6_filme_v11.mp4` (composição `FilmeSEEDSv11`, `npm run render:filme11`): igual ao v10,
+  com o título **«ALIVIANDO A CURVA DE PATO» → «SUAVIZANDO A CURVA DE PATO»** (pedido do responsável). 102,1 s, 3.063
+  quadros, 1920×1080, 30 fps, sem áudio.
+- Mesmo tempo de cena do título aprovado: a digitação termina no quadro 114 de 182 (antes, 112), e o título fica 68 quadros
+  visível depois de completo. Nada mais muda de tempo. `TituloVideo` ganhou o parâmetro opcional `texto`; sem ele, o título
+  original fica intacto.
+- Observação científica, registrada sem alterar o pedido: o despacho reduz 200 MW na ponta tarifária, mas não reduz a rampa
+  máxima do dia. A nota da comparação final continua dizendo isso.
+- Dados: `verificar_capitulo3.py` → «OK — 31 valores conferidos».

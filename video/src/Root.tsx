@@ -20,6 +20,7 @@ import "./fontes";
 
 export const RemotionRoot = () => (
   <>
+    <Composition id="FilmeSEEDSv11" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, logoOficial: true, titulo: "SUAVIZANDO A CURVA DE PATO" }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv10" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, logoOficial: true }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="VerificaDiagonal" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, rodape: false }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv9" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
