@@ -15,6 +15,8 @@ import { COR, FONTE } from "../tema";
 import { SUBTITULO_SEEDS } from "../capitulo1v2/Abertura2";
 import { CINZA_CREDITOS } from "./Creditos2";
 import LOGOS from "../creditos/logos_v3.json";
+import { Img as ImgL, staticFile as sf } from "remotion";
+import LO from "../dados_logo_oficial.json";
 
 const MARCA = "OTIMIZADO NO SEEDS";                      // filme v8 (antes «SIMULADO NO SEEDS»)
 const T = { logo: 6, dig: 34, painel: 10, logos: 22, passo: 7, durLogo: 22 };
@@ -30,7 +32,8 @@ const PW = 840, PH = 440, PX = 990, PY = (1080 - PH) / 2;
 const CW = 240, CH = 180, GX = 26, GY = 24;
 const CX0 = PX + (PW - (3 * CW + 2 * GX)) / 2, CY0 = PY + (PH - (2 * CH + GY)) / 2;
 
-export const Cierre = () => {
+// `emblema` (filme v10): o emblema do LOGO OFICIAL no lugar do glifo violeta antigo.
+export const Cierre: React.FC<{ emblema?: boolean }> = ({ emblema = false }) => {
   const f = useCurrentFrame();
   const logo = interpolate(f, [T.logo, T.logo + 26], [0, 1], { ...cl, easing: saida });
   const painel = interpolate(f, [T.painel, T.painel + 26], [0, 1], { ...cl, easing: saida });
@@ -41,7 +44,7 @@ export const Cierre = () => {
     <AbsoluteFill style={{ background: COR.fundo }}>
       <AbsoluteFill style={{ opacity: sai }}>
         {/* esquerda */}
-        <div style={{ position: "absolute", left: XE, top: 362, opacity: logo, scale: String(0.94 + 0.06 * logo), transformOrigin: "0 50%" }}><GlifoSeeds tamanho={104} /></div>
+        <div style={{ position: "absolute", left: XE, top: 362, opacity: logo, scale: String(0.94 + 0.06 * logo), transformOrigin: "0 50%" }}>{emblema ? <ImgL src={sf(LO.partes.emblema.arquivo)} width={Math.round(LO.partes.emblema.w * 124 / LO.partes.emblema.h)} height={124} style={{ display: "block", marginTop: -14 }} /> : <GlifoSeeds tamanho={104} />}</div>
         {f >= T.dig && (
           <div style={{ position: "absolute", left: XE - 2, top: 504 }}>
             <TituloDigitado texto={MARCA} tamanho={64} ritmo={RIT} ocultarCursorEm={FIM_DIG + 30} />

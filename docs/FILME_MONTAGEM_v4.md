@@ -142,3 +142,25 @@ entregue.
   pelo filme. Dentro das áreas das duas marcas (com margem de 8 px), o brilho máximo é 10/255, que é apenas o fundo quase
   preto da Partitura: nenhum texto, eixo ou gráfico fica sob as marcas.
 - Dados: `verificar_capitulo3.py` → «OK — 31 valores conferidos».
+
+## Filme v10 — logo OFICIAL do SEEDS
+
+- `video/renders/filme_v10/SEEDS_C6_filme_v10.mp4` (composição `FilmeSEEDSv10`, `npm run render:filme10`): igual ao v9
+  (conteúdo centrado, LACA no canto superior esquerdo, GPEnSE no inferior direito, «PASSO 2: DEFININDO PARÂMETROS»,
+  «OTIMIZADO NO SEEDS», 1,5×, **102,1 s**, 3.063 quadros, 1920×1080, 30 fps, sem áudio), com o **logo oficial**.
+- **Original:** `assets/logo_oficial/SEEDS_logo_oficial.png` (1071 × 352 px, fundo branco), fornecido pelo responsável e
+  guardado intocado.
+- **Preparação** (`ferramentas/preparar_logo_oficial.py`): o fundo NÃO entra no filme.
+  - Retira o branco conectado à borda e os 9 vazados do desenho (miolos dos 7 nós do circuito, miolo do «D»), que são
+    regiões brancas fechadas com área ≥ 80 px.
+  - Mantém as nervuras claras das folhas, que fazem parte do desenho.
+  - Desfaz a mistura com o branco num anel de 2 px (sem halo sobre o preto).
+  - Separa o emblema (287 × 309 px) e a palavra «SEEDS» (671 × 131 px). Cores e formas intactas.
+- **Abertura** (`filme/AberturaOficial.tsx`), mesma coreografia aprovada:
+  - o desenho surge sozinho e grande no centro e encolhe;
+  - desliza à esquerda enquanto «SEEDS» se abre por trás dele;
+  - o conjunto final reproduz o logo oficial em escala 1:1 (posições relativas do arquivo).
+  - Depois surge a frase «Smart Energy Ecosystem for Decision Support». No arquivo ela é cinza-escuro e ficaria ilegível
+    sobre preto, por isso no filme é TEXTO em cinza claro, com as mesmas palavras, a mesma posição e a mesma largura.
+- **Fechamento:** o emblema oficial substitui o glifo violeta antigo acima de «OTIMIZADO NO SEEDS».
+- Dados: `verificar_capitulo3.py` → «OK — 31 valores conferidos».
