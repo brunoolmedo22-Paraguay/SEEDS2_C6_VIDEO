@@ -24,7 +24,7 @@ import { CENAS_C1_V3, DUR_C1_V3, DUR_FILME3, FILME3 } from "./FilmeV3";
 import { FAIXA_RODAPE, RodapeInstitucional } from "./RodapeInstitucional";
 import { Mapa } from "./tempo";
 import { AberturaOficial } from "./AberturaOficial";
-import { TEXTO_TITULO_V11, TituloVideo } from "../capitulo1/TituloVideo";
+import { TituloVideo } from "../capitulo1/TituloVideo";
 import { RodapeVariante, VarianteRodape, faixaDe } from "./RodapeVariantes";
 import { FAIXA_CANTOS, RodapeCantos } from "./RodapeCantos";
 import { LayoutMarcas, Marcas, transformConteudo } from "./MarcasLayout";
@@ -42,13 +42,17 @@ const Camada: React.FC<{ src: number; inicio: number; dur: number; mapa?: Mapa; 
   return <Freeze frame={mapa ? aplica(mapa, t) : t}>{children}</Freeze>;
 };
 
-// `titulo` (filme v11): mesmo tempo de cena do título aprovado, só o texto muda (cabe com folga: conferido no doc).
-const Capitulo1: React.FC<{ oficial?: boolean; titulo?: string }> = ({ oficial = false, titulo }) => (
+// `titulo` (opcional; filme v11): troca SÓ o texto digitado da cena «Título», com a MESMA duração da cena (a linha do tempo do
+// filme não muda). Ausente ⇒ «ALIVIANDO A CURVA DE PATO», filmes v4–v10 idênticos.
+const Capitulo1: React.FC<{ oficial?: boolean; titulo?: string }> = ({ oficial = false, titulo }) => {
+  let cenas = oficial ? [{ ...CENAS_C1_V3[0], el: <AberturaOficial dur={CENAS_C1_V3[0].dur} /> }, ...CENAS_C1_V3.slice(1)] : CENAS_C1_V3;
+  if (titulo) cenas = cenas.map((c, k) => (k === 1 ? { ...c, el: <TituloVideo dur={c.dur} texto={titulo} /> } : c));
+  return (
   <Series>
-    {(oficial ? [{ ...CENAS_C1_V3[0], el: <AberturaOficial dur={CENAS_C1_V3[0].dur} /> }, ...CENAS_C1_V3.slice(1)] : CENAS_C1_V3)
-      .map((c, k) => (k === 1 && titulo ? { ...c, el: <TituloVideo dur={c.dur} texto={titulo} /> } : c)).map(({ nome, dur, el }) => <Series.Sequence key={nome} name={nome} durationInFrames={dur}>{el}</Series.Sequence>)}
+    {cenas.map(({ nome, dur, el }) => <Series.Sequence key={nome} name={nome} durationInFrames={dur}>{el}</Series.Sequence>)}
   </Series>
-);
+  );
+};
 
 // `corRodape` (opcional): filme v5 = v4 com a faixa do rodapé em cinza escuro (CINZA_RODAPE_ESCURO); padrão = v4.
 // `variante` (opcional, propostas de rodapé maior): substitui o rodapé e a faixa reservada; ausente ⇒ v4/v5 idênticos.

@@ -3,6 +3,7 @@ import { Capitulo1, DUR_CAP1 } from "./capitulo1/Capitulo1";
 import { Abertura2, DUR_ABERTURA2 } from "./capitulo1v2/Abertura2";
 import { Capitulo1v2, DUR_CAP1V2 } from "./capitulo1v2/Capitulo1v2";
 import { Capitulo1v3, DUR_CAP1V3 } from "./capitulo1v3/Capitulo1v3";
+import { Capitulo1v4, DUR_CAP1V4 } from "./capitulo1v4/Capitulo1v4";
 import { Capitulo2, DUR_CAP2 } from "./capitulo2/Capitulo2";
 import { Capitulo3, DUR_CAP3 } from "./capitulo3/Capitulo3";
 import { Capitulo3v2, DUR_CAP3V2 } from "./capitulo3v2/Capitulo3v2";
@@ -20,6 +21,7 @@ import "./fontes";
 
 export const RemotionRoot = () => (
   <>
+    <Composition id="Capitulo1v4" component={Capitulo1v4} durationInFrames={DUR_CAP1V4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv11" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, logoOficial: true, titulo: "SUAVIZANDO A CURVA DE PATO" }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="FilmeSEEDSv10" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, logoOficial: true }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
     <Composition id="VerificaDiagonal" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, rodape: false }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
