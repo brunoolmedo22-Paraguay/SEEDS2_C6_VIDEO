@@ -1,0 +1,37 @@
+[
+ {
+  "id": "03_LACA",
+  "arquivo": "logos/instituicoes_rodape_cantos/03_LACA.png",
+  "w": 380,
+  "h": 105,
+  "recorte": [
+   0,
+   0,
+   221,
+   61
+  ],
+  "origem": [
+   221,
+   63
+  ]
+ },
+ {
+  "id": "04_GPEnSE",
+  "arquivo": "logos/instituicoes_rodape_cantos/04_GPEnSE.png",
+  "w": 136,
+  "h": 140,
+  "recorte": [
+   108,
+   18,
+   250,
+   164
+  ],
+  "origem": [
+   359,
+   164
+  ],
+  "tratamento": {
+   "franja_semitransparente_px": 1556
+  }
+ }
+]

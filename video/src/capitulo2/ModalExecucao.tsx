@@ -78,7 +78,10 @@ const DiagramaMx: React.FC<{ t: number; parado: boolean }> = ({ t, parado }) => 
 };
 
 /** Cartão do modal no estado D; `t` = segundos (animações contínuas); `larguraAnim` = largura exibida da barra (transição .6 s). */
-export const ModalExecucao: React.FC<{ D: EstadoRodada; t: number; larguraBarra: number | null; horFeito: number; horJan: [number, number] }> = ({ D, t, larguraBarra, horFeito, horJan }) => {
+// Opcionais (montagem integral do filme, src/filme/): `acaoConcluida` substitui as pílulas do rodapé no estado concluído e
+// `textoConcluido` o texto do rodapé. Ausentes ⇒ cartão idêntico ao aprovado (capítulo 2 v1 / capítulo 3).
+export const ModalExecucao: React.FC<{ D: EstadoRodada; t: number; larguraBarra: number | null; horFeito: number; horJan: [number, number];
+  acaoConcluida?: React.ReactNode; textoConcluido?: string }> = ({ D, t, larguraBarra, horFeito, horJan, acaoConcluida, textoConcluido }) => {
   const P = progresso(D);
   const conc = D.situacao === "concluida";
   const ia = FASES.indexOf(D.fase);
@@ -135,12 +138,14 @@ export const ModalExecucao: React.FC<{ D: EstadoRodada; t: number; larguraBarra:
       </div>
       <footer style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: px(14), paddingTop: px(8) }}>
         <span style={{ fontSize: px(11.5), color: T.ink3, flex: "1 1 auto" }}>
-          {conc ? "Abrindo os resultados gravados…" : "A execução continua no servidor mesmo que o painel seja ocultado ou a página recarregada."}
+          {conc ? (textoConcluido ?? "Abrindo os resultados gravados…") : "A execução continua no servidor mesmo que o painel seja ocultado ou a página recarregada."}
         </span>
-        <span style={{ display: "flex", gap: px(8) }}>
-          {pill("OCULTAR PAINEL")}
-          {!conc && pill("CANCELAR EXECUÇÃO", true, D.fase === "auditoria" || D.fase === "gravando")}
-        </span>
+        {conc && acaoConcluida ? acaoConcluida : (
+          <span style={{ display: "flex", gap: px(8) }}>
+            {pill("OCULTAR PAINEL")}
+            {!conc && pill("CANCELAR EXECUÇÃO", true, D.fase === "auditoria" || D.fase === "gravando")}
+          </span>
+        )}
       </footer>
     </div>
   );

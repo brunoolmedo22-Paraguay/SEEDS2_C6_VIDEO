@@ -13,11 +13,44 @@ import { DemandaTarifa, DUR_DT } from "./capitulo1v2/DemandaTarifa";
 import { DUR_EQ, Equipamentos } from "./capitulo1v2/Equipamentos";
 import { DURACAO, ProvaConceito } from "./cenas/ProvaConceito";
 import { TesteTecnico } from "./TesteTecnico";
+import { DUR_FILME, Filme } from "./filme/Filme";
+import { DUR_FILME2, FilmeV2 } from "./filme/FilmeV2";
+import { DUR_FILME3, FilmeV3 } from "./filme/FilmeV3";
+import { DUR_FILME4, FilmeV4 } from "./filme/FilmeV4";
 import "./fontes";
 
 export const RemotionRoot = () => (
   <>
     <Composition id="Capitulo1v4" component={Capitulo1v4} durationInFrames={DUR_CAP1V4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv11" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, logoOficial: true, titulo: "SUAVIZANDO A CURVA DE PATO" }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv10" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, logoOficial: true }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="VerificaDiagonal" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null }, rodape: false }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv9" component={FilmeV4} defaultProps={{ marcas: { layout: "diagonal", cor: null } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv8" component={FilmeV4} defaultProps={{ marcas: { layout: "esquerdaTopo", cor: null } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaTopo1" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: "#121212" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaTopo2" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: "#0b0b0b" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaTopo3" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: null } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv7" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: "#1c1c1c" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaMarcasA" component={FilmeV4} defaultProps={{ marcas: { layout: "topo", cor: "#1c1c1c" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaMarcasB" component={FilmeV4} defaultProps={{ marcas: { layout: "esquerda", cor: "#1c1c1c" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaMarcasC" component={FilmeV4} defaultProps={{ marcas: { layout: "esquerda", cor: null } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv6" component={FilmeV4} defaultProps={{ cantos: { cor: "#333333" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaCantos4" component={FilmeV4} defaultProps={{ cantos: { cor: "#3a3a3a" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaCantos5" component={FilmeV4} defaultProps={{ cantos: { cor: "#2a2a2a" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaCantos1" component={FilmeV4} defaultProps={{ cantos: { cor: "#5a5a5a" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaCantos2" component={FilmeV4} defaultProps={{ cantos: { cor: null } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaCantos3" component={FilmeV4} defaultProps={{ cantos: { cor: "#7a7a7a" } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeE" component={FilmeV4} defaultProps={{ variante: { estilo: "aba", cor: "#5a5a5a", gap: 56, grande: true } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeA" component={FilmeV4} defaultProps={{ variante: { estilo: "pilula", cor: "#5a5a5a", gap: 46 } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeB" component={FilmeV4} defaultProps={{ variante: { estilo: "aba", cor: "#5a5a5a", gap: 50 } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeC" component={FilmeV4} defaultProps={{ variante: { estilo: "faixa", cor: "#555555", gap: 64 } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="PropostaRodapeD" component={FilmeV4} defaultProps={{ variante: { estilo: "aba", cor: "#7a7a7a", gap: 50 } }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv5" component={FilmeV4} defaultProps={{ corRodape: "#5a5a5a" }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv4" component={FilmeV4} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv4SoTempo" component={FilmeV4} defaultProps={{ rodape: false, escala: 1 }} durationInFrames={DUR_FILME4} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv3" component={FilmeV3} durationInFrames={DUR_FILME3} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDSv2" component={FilmeV2} durationInFrames={DUR_FILME2} fps={30} width={1920} height={1080} />
+    <Composition id="FilmeSEEDS" component={Filme} durationInFrames={DUR_FILME} fps={30} width={1920} height={1080} />
     <Composition id="Capitulo3v2" component={Capitulo3v2} durationInFrames={DUR_CAP3V2} fps={30} width={1920} height={1080} />
     <Composition id="Creditos" component={Creditos} durationInFrames={DUR_CREDITOS} fps={30} width={1920} height={1080} />
     <Composition id="Capitulo3" component={Capitulo3} durationInFrames={DUR_CAP3} fps={30} width={1920} height={1080} />
