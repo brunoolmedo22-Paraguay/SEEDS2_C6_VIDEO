@@ -1,0 +1,44 @@
+{
+  "name": "seeds2-c6-video",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SEEDS2 · C6 — vídeo científico animado (Remotion). Gráficos desenhados a partir dos dados gravados das rodadas.",
+  "scripts": {
+    "dados": "python3 ../ferramentas/preparar_dados.py",
+    "studio": "remotion studio",
+    "render:teste": "remotion render TesteTecnico out/teste_tecnico.mp4",
+    "render:poc": "remotion render ProvaConceito out/SEEDS2_C6_prova_conceito_v1.mp4",
+    "render:cap1": "remotion render Capitulo1 out/SEEDS_C6_capitulo1_v1.mp4",
+    "render:cap1v2": "remotion render Capitulo1v2 out/SEEDS_C6_capitulo1_v2.mp4",
+    "render:cap1v4": "remotion render Capitulo1v4 out/SEEDS_C6_capitulo1_v4.mp4",
+    "render:cap1v3": "remotion render Capitulo1v3 out/SEEDS_C6_capitulo1_v3.mp4",
+    "render:cap2": "remotion render Capitulo2 out/SEEDS_C6_capitulo2_v1.mp4",
+    "render:cap3": "remotion render Capitulo3 out/SEEDS_C6_capitulo3_resultados_v1.mp4",
+    "render:cap3v2": "remotion render Capitulo3v2 out/SEEDS_C6_capitulo3_resultados_v2.mp4",
+    "render:filme": "remotion render FilmeSEEDS out/SEEDS_C6_filme_v1.mp4",
+    "render:filme2": "remotion render FilmeSEEDSv2 out/SEEDS_C6_filme_v2.mp4",
+    "render:filme3": "remotion render FilmeSEEDSv3 out/SEEDS_C6_filme_v3.mp4",
+    "render:filme4": "remotion render FilmeSEEDSv4 out/SEEDS_C6_filme_v4.mp4",
+    "render:filme5": "remotion render FilmeSEEDSv5 out/SEEDS_C6_filme_v5.mp4",
+    "render:filme6": "remotion render FilmeSEEDSv6 out/SEEDS_C6_filme_v6.mp4",
+    "render:filme7": "remotion render FilmeSEEDSv7 out/SEEDS_C6_filme_v7.mp4",
+    "render:filme8": "remotion render FilmeSEEDSv8 out/SEEDS_C6_filme_v8.mp4",
+    "render:filme9": "remotion render FilmeSEEDSv9 out/SEEDS_C6_filme_v9.mp4",
+    "render:filme11": "remotion render FilmeSEEDSv11 out/SEEDS_C6_filme_v11.mp4",
+    "render:filme10": "remotion render FilmeSEEDSv10 out/SEEDS_C6_filme_v10.mp4",
+    "render:proto-resultados": "remotion render ProtoResultadosDespacho out/SEEDS_C6_resultados_prototipo_despacho.mp4",
+    "still:teste": "remotion still TesteTecnico out/teste_tecnico.png --frame=75",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.540",
+    "@remotion/fonts": "4.0.540",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "remotion": "4.0.540"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.12",
+    "typescript": "5.9.2"
+  }
+}

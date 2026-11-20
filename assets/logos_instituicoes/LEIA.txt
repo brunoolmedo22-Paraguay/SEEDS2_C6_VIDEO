@@ -1,0 +1,13 @@
+LOGOTIPOS INSTITUCIONAIS PARA O VIDEO SEEDS
+
+Os 6 arquivos PNG são fornecidos pelo responsável, sem nenhuma modificação.
+Usar na tela final de créditos institucionais sem inferir vínculo de patrocínio/financiamento específico.
+
+Sequência: 01 CEAR; 02 logotipo verde conforme imagem original (confirmar sigla antes de escrever texto); 03 LACA; 04 GPEnSE; 05 UFPB; 06 UNILA.
+
+IMPORTANTE:
+- Preservar integridade, proporção, cores e legibilidade de todas as marcas.
+- As imagens 01 a 04 e 06 têm canal alpha/transparência; o logo 05 UFPB possui fundo branco opaco. Preferir marca oficial de fundo transparente se disponível e verificável; caso contrário, usar em um discreto bloco branco de largura consistente, sem alterar brasão.
+- Não transformar os logotipos em artes geradas por IA.
+- Créditos em fundo preto, com tamanho óptico equilibrado e movimentos suaves.
+- NÃO atribuir patrocinadores, coautoria ou apoio sem instruções explícitas.
