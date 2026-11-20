@@ -24,6 +24,7 @@
     "render:filme7": "remotion render FilmeSEEDSv7 out/SEEDS_C6_filme_v7.mp4",
     "render:filme8": "remotion render FilmeSEEDSv8 out/SEEDS_C6_filme_v8.mp4",
     "render:filme9": "remotion render FilmeSEEDSv9 out/SEEDS_C6_filme_v9.mp4",
+    "render:filme11": "remotion render FilmeSEEDSv11 out/SEEDS_C6_filme_v11.mp4",
     "render:filme10": "remotion render FilmeSEEDSv10 out/SEEDS_C6_filme_v10.mp4",
     "render:proto-resultados": "remotion render ProtoResultadosDespacho out/SEEDS_C6_resultados_prototipo_despacho.mp4",
     "still:teste": "remotion still TesteTecnico out/teste_tecnico.png --frame=75",

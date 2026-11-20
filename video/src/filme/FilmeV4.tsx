@@ -24,6 +24,7 @@ import { CENAS_C1_V3, DUR_C1_V3, DUR_FILME3, FILME3 } from "./FilmeV3";
 import { FAIXA_RODAPE, RodapeInstitucional } from "./RodapeInstitucional";
 import { Mapa } from "./tempo";
 import { AberturaOficial } from "./AberturaOficial";
+import { TituloVideo } from "../capitulo1/TituloVideo";
 import { RodapeVariante, VarianteRodape, faixaDe } from "./RodapeVariantes";
 import { FAIXA_CANTOS, RodapeCantos } from "./RodapeCantos";
 import { LayoutMarcas, Marcas, transformConteudo } from "./MarcasLayout";
@@ -41,16 +42,22 @@ const Camada: React.FC<{ src: number; inicio: number; dur: number; mapa?: Mapa; 
   return <Freeze frame={mapa ? aplica(mapa, t) : t}>{children}</Freeze>;
 };
 
-const Capitulo1: React.FC<{ oficial?: boolean }> = ({ oficial = false }) => (
+// `titulo` (opcional; filme v11): troca SÓ o texto digitado da cena «Título», com a MESMA duração da cena (a linha do tempo do
+// filme não muda). Ausente ⇒ «ALIVIANDO A CURVA DE PATO», filmes v4–v10 idênticos.
+const Capitulo1: React.FC<{ oficial?: boolean; titulo?: string }> = ({ oficial = false, titulo }) => {
+  let cenas = oficial ? [{ ...CENAS_C1_V3[0], el: <AberturaOficial dur={CENAS_C1_V3[0].dur} /> }, ...CENAS_C1_V3.slice(1)] : CENAS_C1_V3;
+  if (titulo) cenas = cenas.map((c, k) => (k === 1 ? { ...c, el: <TituloVideo dur={c.dur} texto={titulo} /> } : c));
+  return (
   <Series>
-    {(oficial ? [{ ...CENAS_C1_V3[0], el: <AberturaOficial dur={CENAS_C1_V3[0].dur} /> }, ...CENAS_C1_V3.slice(1)] : CENAS_C1_V3).map(({ nome, dur, el }) => <Series.Sequence key={nome} name={nome} durationInFrames={dur}>{el}</Series.Sequence>)}
+    {cenas.map(({ nome, dur, el }) => <Series.Sequence key={nome} name={nome} durationInFrames={dur}>{el}</Series.Sequence>)}
   </Series>
-);
+  );
+};
 
 // `corRodape` (opcional): filme v5 = v4 com a faixa do rodapé em cinza escuro (CINZA_RODAPE_ESCURO); padrão = v4.
 // `variante` (opcional, propostas de rodapé maior): substitui o rodapé e a faixa reservada; ausente ⇒ v4/v5 idênticos.
 // `cantos` (opcional): só LACA e GPEnSE grandes nos cantos inferiores; `cor` = aba atrás de cada marca (null = sem fundo).
-export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: string; variante?: VarianteRodape; cantos?: { cor: string | null }; marcas?: LayoutMarcas; logoOficial?: boolean }> = ({ rodape = true, escala: esc, corRodape, variante, cantos, marcas, logoOficial = false }) => {
+export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: string; variante?: VarianteRodape; cantos?: { cor: string | null }; marcas?: LayoutMarcas; logoOficial?: boolean; titulo?: string }> = ({ rodape = true, escala: esc, corRodape, variante, cantos, marcas, logoOficial = false, titulo }) => {
   const tm = marcas ? transformConteudo(marcas) : null;
   const escala = esc ?? (tm ? tm.s : cantos ? (1080 - FAIXA_CANTOS) / 1080 : variante ? (1080 - faixaDe(variante)) / 1080 : ESCALA_CONTEUDO);
   const f = useCurrentFrame();
@@ -64,7 +71,7 @@ export const FilmeV4: React.FC<{ rodape?: boolean; escala?: number; corRodape?: 
     <AbsoluteFill style={{ background: COR.fundo }}>
       <AbsoluteFill style={{ transform: escala === 1 ? undefined : `scale(${escala})`, transformOrigin: tm ? tm.origem : "50% 0%" }}>
         {/* mesma ordem de camadas do filme v3 */}
-        <Camada src={src} inicio={F.c1} dur={DUR_C1_V3}><Capitulo1 oficial={logoOficial} /></Camada>
+        <Camada src={src} inicio={F.c1} dur={DUR_C1_V3}><Capitulo1 oficial={logoOficial} titulo={titulo} /></Camada>
         <Camada src={src} inicio={F.r1} dur={DUR_R1F} mapa={MAPA_R1}><R1Partitura2 /></Camada>
         <Camada src={src} inicio={F.c2} dur={DUR_CAP2F}><Capitulo2Filme /></Camada>
         <AbsoluteFill style={{ opacity: opR2 }}>
